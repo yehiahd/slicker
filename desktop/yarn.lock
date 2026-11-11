@@ -9025,10 +9025,10 @@ js-cookie@^2.2.1:
   resolved "https://registry.yarnpkg.com/js-cookie/-/js-cookie-2.2.1.tgz#69e106dc5d5806894562902aa5baec3744e9b2b8"
   integrity sha512-HvdH2LzI/EAZcUwA8+0nKNtWHqS+ZmijLA30RwZA0bo7ToCckjK5MkGhjED9KoRcXO6BaGI3I9UIzSA1FKFPOQ==
 
-js-flipper@^0.182.0:
-  version "0.182.0"
-  resolved "https://registry.yarnpkg.com/js-flipper/-/js-flipper-0.182.0.tgz#3d8a7e1b8eca7eab094281375229749518d3a518"
-  integrity sha512-CNJaBIXXPeg7FGsJ20WoBdt8+WkPH6WoludmHdznpL+vHUSfHJYr8yb+EE0dRX9TPbmUoq6wGxhp7DdOIvXarw==
+js-flipper@^0.273.0:
+  version "0.273.0"
+  resolved "https://registry.yarnpkg.com/js-flipper/-/js-flipper-0.273.0.tgz#3f5adc303756600b861422a6899b0e0674df186f"
+  integrity sha512-pu18GxLTTWnrgfSVuQsztTMZ24APWkKvG+70by1UFIl88a6IengSYLorSJDipypReB20jYQ+bj2jIhhP/9bERQ==
 
 "js-tokens@^3.0.0 || ^4.0.0", js-tokens@^4.0.0:
   version "4.0.0"
