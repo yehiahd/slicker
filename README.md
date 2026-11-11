@@ -51,6 +51,13 @@ a no-op artifact, so nothing ships to users.
 Slicker opens in your browser at http://localhost:52342. It needs `adb` (Android SDK
 platform-tools); it finds it in the default Android Studio location.
 
+- Slicker runs in the background, with no Dock icon or window of its own. Opening it again brings
+  the browser tab back.
+- On first launch a short setup wizard runs (platform, health check, optional browser-app install).
+  Press **Done** on the last step to finish.
+- To stop Slicker: `pkill -f flipper-runtime`. Server logs are in `~/Library/Logs/Slicker/server.log`.
+- Android only: iOS devices and simulators are not supported.
+
 Building from source instead (needs Node or `npx`): `./scripts/slicker-desktop.sh`.
 
 **2. Add the library** to your app:

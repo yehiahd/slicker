@@ -15,8 +15,12 @@ there is no certificate setup.
 
 ## 1. Start the desktop
 
-Requirements: macOS/Linux, `adb` on your PATH (Android SDK platform-tools), and Node or `npx`
-(the script fetches Node 20 automatically; Flipper's dependencies do not run on Node 22+).
+**Easiest (macOS, Apple Silicon):** install the Slicker app from the DMG on the
+[Releases](https://github.com/yehiahd/slicker/releases) page; see the
+[main README](../README.md#quick-start) for install steps.
+
+**From source:** requirements are macOS/Linux, `adb` on your PATH (Android SDK platform-tools), and
+Node or `npx` (the script fetches Node 20 automatically; Flipper's dependencies do not run on Node 22+).
 
 ```bash
 ./scripts/slicker-desktop.sh
@@ -168,6 +172,8 @@ Slicker.start(
 | Two entries for the same phone in the desktop | Expected: one is the adb device, the other is the app connection (named by `deviceId`). Select the one that lists your app. |
 | Nothing happens in a release build | By design: the no-op artifact (or a non-debuggable app) disables everything. |
 | Desktop fails with `SlowBuffer` errors | You are on Node 22+. Use the script, which uses Node 20. |
+| Slicker app opens but no window appears | It runs in the background and opens your browser at http://localhost:52342. Open that URL, or check `~/Library/Logs/Slicker/server.log`. |
+| Setup wizard asks about iOS or shows iOS errors | You are on an old build. Slicker is Android only; install the latest DMG. |
 | Network body missing | Bodies are captured up to 1 MB. One-shot/duplex request bodies (e.g. streaming uploads) are not read. |
 
 ## Limitations
