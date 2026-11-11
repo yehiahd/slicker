@@ -32,29 +32,12 @@ can reach it at `localhost:8333`. No manual adb step is needed.
 
 ---
 
-## 2. Publish the Android library (once per version)
+## 2. Get the Android library
 
-From `slicker-android/`:
+### Option A: JitPack (recommended)
 
-```bash
-./gradlew publishToMavenLocal
-```
-
-This installs to `~/.m2/repository/dev/slicker/`:
-
-| Artifact | Use for |
-|---|---|
-| `dev.slicker:slicker:0.1.0` | debug builds |
-| `dev.slicker:slicker-noop:0.1.0` | release builds (same API, does nothing, no extra code) |
-
-> Gradle needs JDK 17+. If `java -version` is older, point `JAVA_HOME` at Android Studio's JDK:
-> `export JAVA_HOME="/Applications/Android Studio.app/Contents/jbr/Contents/Home"`
-
----
-
-## 3. Add it to any Android project
-
-### 3.1 Repository
+Nothing to build. Releases are published from git tags at
+`https://jitpack.io/#<github-user>/slicker`.
 
 `settings.gradle.kts`:
 
@@ -63,14 +46,35 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        mavenLocal() // slicker
+        maven("https://jitpack.io")
     }
 }
 ```
 
-### 3.2 Dependencies
-
 App module `build.gradle.kts`:
+
+```kotlin
+dependencies {
+    debugImplementation("com.github.<github-user>.slicker:slicker:<tag>")
+    releaseImplementation("com.github.<github-user>.slicker:slicker-noop:<tag>")
+}
+```
+
+Replace `<github-user>` with the GitHub account hosting the repo and `<tag>` with a release tag
+(e.g. `v0.1.0`).
+
+### Option B: local build (mavenLocal)
+
+From `slicker-android/`:
+
+```bash
+./gradlew publishToMavenLocal
+```
+
+> Gradle needs JDK 17+. If `java -version` is older, point `JAVA_HOME` at Android Studio's JDK:
+> `export JAVA_HOME="/Applications/Android Studio.app/Contents/jbr/Contents/Home"`
+
+Then add `mavenLocal()` to your repositories and depend on:
 
 ```kotlin
 dependencies {
@@ -78,6 +82,15 @@ dependencies {
     releaseImplementation("dev.slicker:slicker-noop:0.1.0")
 }
 ```
+
+---
+
+## 3. Add it to any Android project
+
+### 3.1 Dependencies
+
+Add the repository and dependencies from step 2 (JitPack or mavenLocal). The examples below use the
+local coordinates; with JitPack use `com.github.<github-user>.slicker:slicker:<tag>` instead.
 
 Using other build types or flavors (e.g. `staging`)? Every variant needs exactly one of the two:
 
@@ -88,7 +101,7 @@ Using other build types or flavors (e.g. `staging`)? Every variant needs exactly
 The real artifact also does nothing on its own when the app is not debuggable, so using it in a
 debuggable `staging` build is safe.
 
-### 3.3 Start it
+### 3.2 Start it
 
 In your `Application`:
 
@@ -103,7 +116,7 @@ class MyApp : Application() {
 }
 ```
 
-### 3.4 Hook up Network
+### 3.3 Hook up Network
 
 Add the interceptor to every `OkHttpClient` you want to see (Retrofit uses OkHttp underneath):
 
@@ -121,7 +134,7 @@ or use `addNetworkInterceptor(...)` to see what goes over the wire after redirec
 Databases and Preferences need no code: every database in `databases/` and every file in
 `shared_prefs/` is picked up automatically.
 
-### 3.5 Run
+### 3.4 Run
 
 1. Start the desktop (step 1).
 2. Run the debug app on an emulator or USB device.
@@ -164,6 +177,18 @@ Slicker.start(
 - Network bodies are capped at 1 MB.
 - Desktop and device must be connected over adb (USB or emulator). Wi-Fi-only devices need
   `adb connect` first.
+
+## Releasing to JitPack
+
+JitPack builds the library from `jitpack.yml` at the repo root (JDK 17, `slicker-android` only).
+
+```bash
+git tag v0.1.0
+git push origin v0.1.0
+```
+
+Then open `https://jitpack.io/#<github-user>/slicker`, pick the tag and press **Get it** (the first
+request triggers the build). The repository must be public, or connected to a paid JitPack plan.
 
 ## Project layout
 

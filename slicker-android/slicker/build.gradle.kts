@@ -3,8 +3,9 @@ plugins {
     `maven-publish`
 }
 
-group = "dev.slicker"
-version = "0.1.0"
+// On JitPack, GROUP (com.github.<user>) and VERSION (the git tag) are set by the build.
+group = System.getenv("GROUP") ?: "dev.slicker"
+version = System.getenv("VERSION") ?: "0.1.0"
 
 android {
     namespace = "dev.slicker"

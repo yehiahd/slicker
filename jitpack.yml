@@ -1,0 +1,5 @@
+# JitPack builds only the Android library (slicker-android/), not the Flipper desktop.
+jdk:
+  - openjdk17
+install:
+  - cd slicker-android && ./gradlew :slicker:publishToMavenLocal :slicker-noop:publishToMavenLocal --console=plain
