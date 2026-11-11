@@ -1060,12 +1060,7 @@
   resolved "https://registry.yarnpkg.com/@types/json5/-/json5-0.0.29.tgz#ee28707ae94e11d2b827bcbe5270bcea7f3e71ee"
   integrity sha1-7ihweulOEdK4J7y+UnC86n8+ce4=
 
-"@types/node@*":
-  version "18.6.3"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.6.3.tgz#4e4a95b6fe44014563ceb514b2598b3e623d1c98"
-  integrity sha512-6qKpDtoaYLM+5+AFChLhHermMQxc3TOEFIDzrZLPRGHPrLEwqFkkT5Kx3ju05g6X7uDPazz3jHbKPX0KzCjntg==
-
-"@types/node@^20.8.8":
+"@types/node@*", "@types/node@^20.8.8":
   version "20.8.8"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-20.8.8.tgz#adee050b422061ad5255fc38ff71b2bb96ea2a0e"
   integrity sha512-YRsdVxq6OaLfmR9Hy816IMp33xOBjfyOgUd77ehqg96CFywxAPbDbXvAsuN2KVg2HOT8Eh6uAfU+l4WffwPVrQ==
@@ -1095,9 +1090,9 @@
   integrity sha512-Hl219/BT5fLAaz6NDkSuhzasy49dwQS/DSdu4MdggFB8zcXv7vflBI3xp7FEmkmdDkBUI2bPUNeMttp2knYdxw==
 
 "@types/ws@^8.5.8":
-  version "8.5.8"
-  resolved "https://registry.yarnpkg.com/@types/ws/-/ws-8.5.8.tgz#13efec7bd439d0bdf2af93030804a94f163b1430"
-  integrity sha512-flUksGIQCnJd6sZ1l5dqCEG/ksaoAg/eUwiLAGTJQcfgvZJKF++Ta4bJA6A5aPSJmsr+xlseHn4KLgVlNnvPTg==
+  version "8.18.2"
+  resolved "https://registry.yarnpkg.com/@types/ws/-/ws-8.18.2.tgz#25d6321b30ef0fddf6cc7052b4eef9ce4e412b6e"
+  integrity sha512-67MQl+fpWKVTT1NYdnmo3U4sc/xPo/zQBncVnI74qmQa0z/b+1g6iYqNmGCPbxO+zz2aklb08a0oHfegiVd0/w==
   dependencies:
     "@types/node" "*"
 
@@ -4961,9 +4956,9 @@ write-file-atomic@^4.0.2:
     signal-exit "^3.0.7"
 
 ws@^8.14.2:
-  version "8.14.2"
-  resolved "https://registry.yarnpkg.com/ws/-/ws-8.14.2.tgz#6c249a806eb2db7a20d26d51e7709eab7b2e6c7f"
-  integrity sha512-wEBG1ftX4jcglPxgFCMJmZ2PLtSbJ2Peg6TmpJFTbe9GZYOQCDPdMYu/Tm0/bGZkw8paZnJY45J4K2PZrLYq8g==
+  version "8.22.1"
+  resolved "https://registry.yarnpkg.com/ws/-/ws-8.22.1.tgz#60d427870e8272ddb10c7fc5cdf00a70eaec369e"
+  integrity sha512-oyL6OPYme/CmiFvNuGzeoxCJ4nOrZE2O1FwM9MWM1AsGri6nLXB2pg+lNA8aLeXMSav0J6eIVS1j6vUPzUtK9g==
 
 y18n@^5.0.5:
   version "5.0.8"
