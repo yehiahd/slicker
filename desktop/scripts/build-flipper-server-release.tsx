@@ -711,7 +711,7 @@ async function createMacDMG(
         return reject(new Error(stderr));
       }
 
-      await fs.move(dmgOutputPath, dmgPath);
+      await fs.move(dmgOutputPath, dmgPath, {overwrite: true});
       await fs.remove(outputPath);
 
       console.log(`✅  DMG successfully created ${dmgPath}`);

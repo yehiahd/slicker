@@ -83,12 +83,14 @@ function Footer({
   onPrev,
   hasNext,
   onSkip,
+  onDone,
 }: {
   onNext: () => void;
   nextDisabled: boolean;
   onPrev: (() => void) | void;
   onSkip: null | (() => void);
   hasNext: boolean;
+  onDone?: () => void;
 }) {
   return (
     <div style={{display: 'flex'}}>
@@ -98,6 +100,11 @@ function Footer({
         {hasNext && (
           <Button onClick={onNext} disabled={nextDisabled} type="primary">
             Next
+          </Button>
+        )}
+        {!hasNext && onDone && (
+          <Button onClick={onDone} type="primary">
+            Done
           </Button>
         )}
       </div>
@@ -248,6 +255,7 @@ export function FlipperSetupWizard({
             (currentStep === 'login' && loginState !== 'success')
           }
           hasNext={!isLastOptionalStep}
+          onDone={onClose}
         />
       }
       width={650}

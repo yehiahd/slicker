@@ -71,7 +71,7 @@ export const PlatformSelectWizard = withTrackingScope(
       [store, updatedSettings],
     );
 
-    const {enableAndroid, enableIOS} = updatedSettings;
+    const {enableAndroid} = updatedSettings;
 
     const settingsPristine = isEqual(settings, updatedSettings);
 
@@ -93,16 +93,6 @@ export const PlatformSelectWizard = withTrackingScope(
             setUpdateSettings({
               ...updatedSettings,
               enableAndroid: v,
-            });
-          }}
-        />
-        <ToggledSection
-          label="iOS Developer"
-          toggled={enableIOS && platform === 'darwin'}
-          onChange={(v) => {
-            setUpdateSettings({
-              ...updatedSettings,
-              enableIOS: v,
             });
           }}
         />

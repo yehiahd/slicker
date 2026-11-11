@@ -574,13 +574,6 @@ function TroubleshootMenu({
               Connectivity Logs
             </Menu.Item>
             <Menu.Item
-              key="restart-idb"
-              onClick={() => {
-                getFlipperServer().exec('ios-idb-kill');
-              }}>
-              Restart IDB (iOS connections)
-            </Menu.Item>
-            <Menu.Item
               key="restart-adb"
               onClick={() => {
                 getFlipperServer().exec('android-adb-kill');

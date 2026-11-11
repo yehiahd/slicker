@@ -125,10 +125,7 @@ class SettingsSheet extends Component<Props, State> {
     const {
       enableAndroid,
       androidHome,
-      enableIOS,
-      enablePhysicalIOS,
       enablePrefetching,
-      idbPath,
       darkMode,
       suppressPluginErrors,
       persistDeviceData,
@@ -175,51 +172,6 @@ class SettingsSheet extends Component<Props, State> {
               });
             }}
           />
-        </ToggledSection>
-        <ToggledSection
-          label="iOS Developer"
-          toggled={enableIOS && this.props.platform === 'darwin'}
-          onChange={(v) => {
-            this.setState({
-              updatedSettings: {...this.state.updatedSettings, enableIOS: v},
-            });
-          }}>
-          {' '}
-          {this.props.platform === 'darwin' && (
-            <ConfigText
-              content={'Use "xcode-select" to switch between Xcode versions'}
-            />
-          )}
-          {this.props.platform !== 'darwin' && (
-            <ConfigText
-              content={
-                'iOS development has limited functionality on non-MacOS devices'
-              }
-            />
-          )}
-          <ToggledSection
-            label="Enable physical iOS devices"
-            toggled={enablePhysicalIOS}
-            frozen={false}
-            onChange={(v) => {
-              this.setState({
-                updatedSettings: {
-                  ...this.state.updatedSettings,
-                  enablePhysicalIOS: v,
-                },
-              });
-            }}>
-            <FilePathConfigField
-              label="IDB binary location"
-              defaultValue={idbPath}
-              isRegularFile
-              onChange={(v) => {
-                this.setState({
-                  updatedSettings: {...this.state.updatedSettings, idbPath: v},
-                });
-              }}
-            />
-          </ToggledSection>
         </ToggledSection>
         <LauncherSettingsPanel
           isPrefetchingEnabled={enablePrefetching}

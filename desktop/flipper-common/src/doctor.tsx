@@ -46,7 +46,7 @@ export namespace FlipperDoctor {
   export type Healthchecks = {
     common: HealthcheckCategory | SkippedHealthcheckCategory;
     android: HealthcheckCategory | SkippedHealthcheckCategory;
-    ios: HealthcheckCategory | SkippedHealthcheckCategory;
+    ios?: HealthcheckCategory | SkippedHealthcheckCategory; // Slicker: never set (Android only)
   };
 
   export type Settings = {

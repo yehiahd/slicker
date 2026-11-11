@@ -1,14 +1,31 @@
 #!/usr/bin/env bash
+# Slicker launcher: starts the bundled server (if not already running) and opens the UI in the browser.
 
+URL="http://localhost:52342"
 SCRIPT_PATH="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 NODE_PATH="${SCRIPT_PATH}/flipper-runtime"
 SERVER_RESOURCES="$SCRIPT_PATH/../Resources/server"
+LOG_DIR="$HOME/Library/Logs/Slicker"
 
+# Already running: just bring the UI back.
+if curl -s -o /dev/null "$URL"; then
+  open "$URL"
+  exit 0
+fi
+
+mkdir -p "$LOG_DIR"
 cd "$SERVER_RESOURCES" || exit 1
 echo "Starting Slicker ..."
-"$NODE_PATH" . "$@" &
+nohup "$NODE_PATH" . --no-open "$@" >"$LOG_DIR/server.log" 2>&1 &
 
-# Wait for the Slicker HTTP server to start listening
-while ! curl -s http://localhost:52342 >/dev/null; do
-    sleep 1
+# Wait up to 60s for the Slicker HTTP server to start listening.
+for _ in $(seq 1 60); do
+  if curl -s -o /dev/null "$URL"; then
+    open "$URL"
+    exit 0
+  fi
+  sleep 1
 done
+
+osascript -e 'display alert "Slicker did not start" message "See ~/Library/Logs/Slicker/server.log for details."' >/dev/null 2>&1
+exit 1

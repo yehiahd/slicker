@@ -23,17 +23,11 @@ export async function getHealthChecks(
           'Healthcheck is skipped, because "Android Development" option is disabled in the Flipper settings',
       };
     }
-    if (!options.settings.enableIOS) {
-      healthchecks.ios = {
-        label: healthchecks.ios.label,
-        isSkipped: true,
-        skipReason:
-          'Healthcheck is skipped, because "iOS Development" option is disabled in the Flipper settings',
-      };
-    }
+    // Slicker supports Android only: drop the iOS checks entirely.
+    delete healthchecks.ios;
     Object.keys(healthchecks).forEach((cat) => {
       const category = healthchecks[cat as keyof typeof healthchecks];
-      if ('healthchecks' in category) {
+      if (category && 'healthchecks' in category) {
         category.healthchecks.forEach((h) => {
           delete h.run;
         });

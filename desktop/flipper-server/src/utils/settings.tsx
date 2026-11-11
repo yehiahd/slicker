@@ -14,7 +14,18 @@ import {Settings, Tristate} from 'flipper-common';
 import {readFile, writeFile, pathExists, mkdirp} from 'fs-extra';
 import {flipperSettingsFolder} from './paths';
 
+// Slicker supports Android only: iOS is always off, whatever the saved settings say.
+function withoutIOS(settings: Settings): Settings {
+  return {...settings, enableIOS: false, enablePhysicalIOS: false};
+}
+
 export async function loadSettings(
+  settingsString: string = '',
+): Promise<Settings> {
+  return withoutIOS(await loadSettingsRaw(settingsString));
+}
+
+async function loadSettingsRaw(
   settingsString: string = '',
 ): Promise<Settings> {
   if (settingsString !== '') {
@@ -53,8 +64,8 @@ async function getDefaultSettings(): Promise<Settings> {
   return {
     androidHome: await getDefaultAndroidSdkPath(),
     enableAndroid: true,
-    enableIOS: os.platform() === 'darwin',
-    enablePhysicalIOS: os.platform() === 'darwin',
+    enableIOS: false,
+    enablePhysicalIOS: false,
     enablePrefetching: Tristate.Unset,
     idbPath: '/usr/local/bin/idb',
     darkMode: 'light',
