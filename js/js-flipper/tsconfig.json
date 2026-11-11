@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "outDir": "lib",
+    "esModuleInterop": true,
+    "target": "ES5",
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "sourceMap": true,
+    "declaration": true,
+    "moduleResolution": "node",
+    "skipLibCheck": true,
+    "strict": true,
+    "strictFunctionTypes": false,
+    "downlevelIteration": true,
+    "module": "commonjs",
+    "baseUrl": "."
+  },
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/__tests__/*"
+  ]
+}

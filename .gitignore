@@ -1,0 +1,69 @@
+node_modules
+dist
+website/build
+yarn-error.log
+bundle.js
+bundle.map
+*.bundle.js
+*.bundle.map
+.env
+desktop-branch-*/
+auth.token
+manifest.json
+
+# conflicts with FB internal infra
+.watchmanconfig
+
+# Don't checkout the yarn/npm lock files that we don't need
+./yarn.lock
+./package-lock.json
+js/yarn.lock
+js/package-lock.json
+react-native/yarn.lock
+react-native/package-lock.json
+
+# iOS / Xcode
+*.xcworkspace
+**/Pods/
+**/xcuserdata/
+**/idb-applications/
+**/idb-dsyms/
+**/idb-dylibs/
+**/idb-frameworks/
+**/idb-test-bundles/
+
+android/third-party/external/
+
+# Android / Intellij
+local.properties
+*.iml
+.gradle/
+.idea
+.externalNativeBuild
+.project
+.settings
+**/.classpath
+android/*/bin/**/*.class
+libs/*/bin/**/*.class
+.cxx
+*.hprof
+
+android/build
+android/*/build
+android/plugins/*/build
+xplat/build
+
+# Mac OS X
+*.DS_Store
+facebook/flipper-server/Resources/
+
+# Automatically generated
+docs/extending/ui-components.mdx
+docs/setup/plugins/
+docs/features/plugins/
+website/src/embedded-pages/docs/plugins/
+
+# Logs
+**/*/flipper-server-log.out
+
+*.salive

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Flipper Server not running</title>
+
+  <!-- Inline the page's stylesheet. -->
+  <style>
+    body {
+      font-family: system-ui;
+      font-size: 13px;
+      cursor: default;
+      overflow: hidden;
+      line-height: 1;
+    }
+
+    #container {
+      -webkit-app-region: drag;
+      z-index: 999999;
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      padding: 50px;
+      overflow: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      color: #525252;
+      text-align: center;
+    }
+
+    input[type="submit"] {
+      background-color: #9254de;
+      color: white;
+      font-family: system-ui;
+      font-size: 15px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #722ed1;
+    }
+
+    input[type="submit"]:active {
+      background-color: #722ed1;
+    }
+
+    input[type="submit"]:disabled {
+      background-color: gray;
+      color: lightgray;
+      cursor: not-allowed;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div id="container">
+    <div>
+      <b>Flipper is not running in the background</b>
+
+      <p>It can be started by clicking the button below.</p>
+      <form action="flipper-launcher://start-server"  onSubmit="serverStart();">
+        <input id="submit" type="submit" value="Start" />
+      </form>
+
+      <p>
+        Flipper will automatically reload once the connection is re-established.
+      </p>
+      <p>Note: if is taking a bit longer than it should, you can manually start Flipper by launching it from the <b>Applications</b> folder.</p>
+    </div>
+
+  </div>
+
+  <script>
+    function serverStart() {
+      const button = document.getElementById('submit');
+      if (!button) {
+        return;
+      }
+      button.disabled = true;
+      button.value = 'Starting...';
+
+      // Set a timeout to disable the start button for
+      // a period of 30 seconds. If after 30 seconds, the server
+      // has not loaded, then re-enable it.
+      setTimeout(() => {
+        button.disabled = false;
+        button.value = 'Start';
+
+      }, 30 * 10000);
+    }
+
+    // Listen to changes in the network state, reload when online.
+    // This handles the case when the device is completely offline
+    // i.e. no network connection.
+    window.addEventListener('online', () => {
+      window.location.reload();
+    });
+
+    // Check if the server is responding & reload the page if it is.
+    // This handles the case when the device is online, but the server
+    // is offline or misbehaving.
+    async function checkNetworkAndReload() {
+      try {
+        const response = await fetch('.');
+        if (response.status >= 200 && response.status < 500) {
+          window.location.reload();
+          return;
+        }
+      } catch {
+        // Unable to connect to the server, ignore.
+      }
+      window.setTimeout(checkNetworkAndReload, 2500);
+    }
+
+    checkNetworkAndReload();
+
+  </script>
+</body>
+
+</html>

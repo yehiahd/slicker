@@ -1,0 +1,38 @@
+{
+  "name": "ReactNativeFlipperExample",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "windows": "react-native run-windows",
+    "start": "react-native start",
+    "test": "jest",
+    "use-local-deps": "relative-deps"
+  },
+  "dependencies": {
+    "react": "^18.0.0",
+    "react-native": "^0.69.7",
+    "react-native-flipper": "^0.195.0",
+    "react-native-windows": "^0.69.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.21.3",
+    "@babel/runtime": "^7.21.0",
+    "babel-jest": "^29.5.0",
+    "jest": "^29.5.0",
+    "metro-config": "^0.76.0",
+    "metro-react-native-babel-preset": "0.76.4",
+    "react-test-renderer": "18.2.0",
+    "relative-deps": "^1.0.7"
+  },
+  "jest": {
+    "preset": "react-native"
+  },
+  "relativeDependencies": {
+    "react-native-flipper": "../react-native-flipper"
+  },
+  "resolutions": {
+    "react-devtools-core": "4.24.1"
+  }
+}

@@ -1,0 +1,46 @@
+import useBaseUrl from '@docusaurus/useBaseUrl';
+import Link from '@docusaurus/Link';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+The <Link to={useBaseUrl("/docs/features/plugins/preferences")}>Shared Preferences Viewer plugin</Link> is available for both [Android](#android) and [iOS](#ios).
+
+## Android
+
+```java
+import com.facebook.flipper.plugins.sharedpreferences.SharedPreferencesFlipperPlugin;
+
+client.addPlugin(
+    new SharedPreferencesFlipperPlugin(context, "my_shared_preference_file"));
+```
+
+## iOS
+
+If you want to use the Shared Preferences plugin, you need to add `FlipperKit/FlipperKitUserDefaultsPlugin` to your Podfile.
+
+```ruby
+pod 'FlipperKit/FlipperKitUserDefaultsPlugin', '~>' + flipperkit_version
+```
+
+Initialize the plugin in the following way:
+
+<Tabs defaultValue="ios" values={[{ label: 'iOS', value: 'ios'}, { label: 'Swift', value: 'swift'}]}>
+<TabItem value="ios">
+
+```objectivec
+#import <FlipperKitUserDefaultsPlugin/FKUserDefaultsPlugin.h>
+
+[client addPlugin:[[FKUserDefaultsPlugin alloc] initWithSuiteName:@"your_suitename"]];
+```
+
+</TabItem>
+<TabItem value="swift">
+
+```swift
+import FlipperKit
+
+client?.add(FKUserDefaultsPlugin.init(suiteName: "your_suitename"))
+```
+
+</TabItem>
+</Tabs>

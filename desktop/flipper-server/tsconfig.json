@@ -1,0 +1,29 @@
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "lib",
+    "rootDir": "src",
+    "lib": ["DOM", "ES2021"],
+    "types": [
+      "../types/flipperGlobals",
+      "../types/metro-resolver",
+      "../types/metro",
+      "../types/JSONStream",
+      "../types/adbkit",
+      "../types/openssl-wrapper",
+      "../types/adbkit-logcat"
+    ]
+  },
+  "include": ["./src/**/*"],
+  "references": [
+    {
+      "path": "../flipper-common"
+    },
+    {
+      "path": "../plugin-lib"
+    },
+    {
+      "path": "../pkg-lib"
+    }
+  ]
+}

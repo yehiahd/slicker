@@ -1,0 +1,19 @@
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "lib",
+    "rootDir": "src",
+    "types": ["../types/metro", "../types/metro-cache"]
+  },
+  "references": [
+    {
+      "path": "../babel-transformer"
+    },
+    {
+      "path": "../flipper-common"
+    },
+    {
+      "path": "../plugin-lib"
+    }
+  ]
+}

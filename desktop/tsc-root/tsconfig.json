@@ -1,0 +1,46 @@
+{
+  "references": [
+    {
+      "path": "../babel-transformer"
+    },
+    {
+      "path": "../plugin-lib"
+    },
+    {
+      "path": "../flipper-common"
+    },
+    {
+      "path": "../examples/flipper-dump"
+    },
+    {
+      "path": "../flipper-plugin"
+    },
+    {
+      "path": "../flipper-server"
+    },
+    {
+      "path": "../flipper-server-client"
+    },
+    {
+      "path": "../flipper-ui"
+    },
+    {
+      "path": "../pkg"
+    },
+    {
+      "path": "../pkg-lib"
+    },
+    {
+      "path": "../eslint-plugin-flipper"
+    },
+    {
+      "path": "../test-utils"
+    },
+    {
+      "path": "../scripts"
+    },
+    {
+      "path": "../deprecated-exports"
+    }
+  ]
+}

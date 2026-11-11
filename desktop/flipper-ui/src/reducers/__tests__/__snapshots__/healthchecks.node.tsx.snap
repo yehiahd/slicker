@@ -1,0 +1,374 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`acknowledgeProblems 1`] = `
+{
+  "acknowledgedProblems": [
+    "ios.sdk",
+    "common.openssl",
+  ],
+  "healthcheckReport": {
+    "categories": {
+      "android": {
+        "checks": {
+          "android.sdk": {
+            "key": "android.sdk",
+            "label": "SDK Installed",
+            "result": {
+              "isAcknowledged": true,
+              "status": "SUCCESS",
+            },
+          },
+        },
+        "key": "android",
+        "label": "Android",
+        "result": {
+          "isAcknowledged": true,
+          "status": "SUCCESS",
+        },
+      },
+      "common": {
+        "checks": {
+          "common.openssl": {
+            "key": "common.openssl",
+            "label": "OpenSSL Istalled",
+            "result": {
+              "isAcknowledged": true,
+              "status": "FAILED",
+            },
+          },
+        },
+        "key": "common",
+        "label": "Common",
+        "result": {
+          "isAcknowledged": true,
+          "status": "FAILED",
+        },
+      },
+      "ios": {
+        "checks": {
+          "ios.sdk": {
+            "key": "ios.sdk",
+            "label": "SDK Installed",
+            "result": {
+              "isAcknowledged": true,
+              "status": "FAILED",
+            },
+          },
+        },
+        "key": "ios",
+        "label": "iOS",
+        "result": {
+          "isAcknowledged": true,
+          "status": "FAILED",
+        },
+      },
+    },
+    "result": {
+      "isAcknowledged": true,
+      "status": "FAILED",
+    },
+  },
+}
+`;
+
+exports[`finish 1`] = `
+{
+  "acknowledgedProblems": [],
+  "healthcheckReport": {
+    "categories": {
+      "android": {
+        "checks": {
+          "android.sdk": {
+            "key": "android.sdk",
+            "label": "SDK Installed",
+            "result": {
+              "isAcknowledged": false,
+              "message": [
+                "android.sdk--installed",
+                {
+                  "output": "success",
+                },
+              ],
+              "status": "SUCCESS",
+            },
+          },
+        },
+        "key": "android",
+        "label": "Android",
+        "result": {
+          "isAcknowledged": false,
+          "status": "SUCCESS",
+        },
+      },
+      "common": {
+        "checks": {
+          "common.openssl": {
+            "key": "common.openssl",
+            "label": "OpenSSL Istalled",
+            "result": {
+              "isAcknowledged": false,
+              "message": [
+                "common.openssl--installed",
+                {
+                  "output": "not found",
+                },
+              ],
+              "status": "SUCCESS",
+            },
+          },
+        },
+        "key": "common",
+        "label": "Common",
+        "result": {
+          "isAcknowledged": false,
+          "status": "SUCCESS",
+        },
+      },
+      "ios": {
+        "checks": {
+          "ios.sdk": {
+            "key": "ios.sdk",
+            "label": "SDK Installed",
+            "result": {
+              "isAcknowledged": false,
+              "message": [
+                "ios.sdk--installed",
+                {
+                  "platforms": [
+                    "ios",
+                  ],
+                },
+              ],
+              "status": "SUCCESS",
+            },
+          },
+        },
+        "key": "ios",
+        "label": "iOS",
+        "result": {
+          "isAcknowledged": false,
+          "status": "SUCCESS",
+        },
+      },
+    },
+    "result": {
+      "status": "SUCCESS",
+    },
+  },
+}
+`;
+
+exports[`startHealthCheck 1`] = `
+{
+  "acknowledgedProblems": [],
+  "healthcheckReport": {
+    "categories": {
+      "android": {
+        "checks": {
+          "android.sdk": {
+            "key": "android.sdk",
+            "label": "SDK Installed",
+            "result": {
+              "status": "IN_PROGRESS",
+            },
+          },
+        },
+        "key": "android",
+        "label": "Android",
+        "result": {
+          "status": "IN_PROGRESS",
+        },
+      },
+      "common": {
+        "checks": {
+          "common.openssl": {
+            "key": "common.openssl",
+            "label": "OpenSSL Istalled",
+            "result": {
+              "status": "IN_PROGRESS",
+            },
+          },
+        },
+        "key": "common",
+        "label": "Common",
+        "result": {
+          "status": "IN_PROGRESS",
+        },
+      },
+      "ios": {
+        "checks": {
+          "ios.sdk": {
+            "key": "ios.sdk",
+            "label": "SDK Installed",
+            "result": {
+              "status": "IN_PROGRESS",
+            },
+          },
+        },
+        "key": "ios",
+        "label": "iOS",
+        "result": {
+          "status": "IN_PROGRESS",
+        },
+      },
+    },
+    "result": {
+      "status": "IN_PROGRESS",
+    },
+  },
+}
+`;
+
+exports[`statuses updated after healthchecks finished 1`] = `
+{
+  "acknowledgedProblems": [],
+  "healthcheckReport": {
+    "categories": {
+      "android": {
+        "checks": {
+          "android.sdk": {
+            "key": "android.sdk",
+            "label": "SDK Installed",
+            "result": {
+              "isAcknowledged": false,
+              "message": [
+                "android.sdk--not_installed",
+                {
+                  "output": "some error message",
+                },
+              ],
+              "status": "FAILED",
+            },
+          },
+        },
+        "key": "android",
+        "label": "Android",
+        "result": {
+          "isAcknowledged": false,
+          "status": "FAILED",
+        },
+      },
+      "common": {
+        "checks": {
+          "common.openssl": {
+            "key": "common.openssl",
+            "label": "OpenSSL Istalled",
+            "result": {
+              "isAcknowledged": false,
+              "message": [
+                "common.openssl--installed",
+                {
+                  "output": "found",
+                },
+              ],
+              "status": "SUCCESS",
+            },
+          },
+        },
+        "key": "common",
+        "label": "Common",
+        "result": {
+          "status": "SUCCESS",
+        },
+      },
+      "ios": {
+        "checks": {
+          "ios.sdk": {
+            "key": "ios.sdk",
+            "label": "SDK Installed",
+            "result": {
+              "isAcknowledged": false,
+              "message": [
+                "ios.sdk--installed",
+                {
+                  "platforms": [
+                    "ios",
+                  ],
+                },
+              ],
+              "status": "SUCCESS",
+            },
+          },
+        },
+        "key": "ios",
+        "label": "iOS",
+        "result": {
+          "status": "SUCCESS",
+        },
+      },
+    },
+    "result": {
+      "isAcknowledged": false,
+      "status": "FAILED",
+    },
+  },
+}
+`;
+
+exports[`updateHealthcheckResult 1`] = `
+{
+  "acknowledgedProblems": [],
+  "healthcheckReport": {
+    "categories": {
+      "android": {
+        "checks": {
+          "android.sdk": {
+            "key": "android.sdk",
+            "label": "SDK Installed",
+            "result": {
+              "isAcknowledged": false,
+              "message": [
+                "android.sdk--installed",
+                {
+                  "output": "some error message",
+                },
+              ],
+              "status": "SUCCESS",
+            },
+          },
+        },
+        "key": "android",
+        "label": "Android",
+        "result": {
+          "status": "IN_PROGRESS",
+        },
+      },
+      "common": {
+        "checks": {
+          "common.openssl": {
+            "key": "common.openssl",
+            "label": "OpenSSL Istalled",
+            "result": {
+              "status": "IN_PROGRESS",
+            },
+          },
+        },
+        "key": "common",
+        "label": "Common",
+        "result": {
+          "status": "IN_PROGRESS",
+        },
+      },
+      "ios": {
+        "checks": {
+          "ios.sdk": {
+            "key": "ios.sdk",
+            "label": "SDK Installed",
+            "result": {
+              "status": "IN_PROGRESS",
+            },
+          },
+        },
+        "key": "ios",
+        "label": "iOS",
+        "result": {
+          "status": "IN_PROGRESS",
+        },
+      },
+    },
+    "result": {
+      "status": "IN_PROGRESS",
+    },
+  },
+}
+`;

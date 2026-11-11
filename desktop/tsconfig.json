@@ -1,0 +1,18 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "incremental": false,
+    "composite": false,
+    "allowJs": false,
+    // for unit tests:
+    "lib": ["DOM", "ES2021"],
+    "types": ["jest"]
+  },
+  "exclude": [
+    "**/node_modules/",
+    "**/lib/",
+    "**/dist/",
+    "flipper-server/static/**"
+  ]
+}

@@ -1,0 +1,95 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`can create a Fake flipper with legacy wrapper 1`] = `
+{
+  "clients": Map {
+    "TestApp#Android#MockAndroidDevice#serial" => {
+      "id": "TestApp#Android#MockAndroidDevice#serial",
+      "query": {
+        "app": "TestApp",
+        "app_id": "TestApp",
+        "device": "MockAndroidDevice",
+        "device_id": "serial",
+        "medium": "NONE",
+        "os": "Android",
+        "sdk_version": 4,
+      },
+    },
+  },
+  "deepLinkPayload": null,
+  "devices": [
+    {
+      "deviceType": "physical",
+      "os": "Android",
+      "serial": "serial",
+      "title": "MockAndroidDevice",
+    },
+  ],
+  "enabledDevicePlugins": Set {
+    "DeviceLogs",
+    "CrashReporter",
+    "MobileBuilds",
+    "Hermesdebuggerrn",
+    "React",
+  },
+  "enabledPlugins": {
+    "TestApp": [
+      "TestPlugin",
+    ],
+  },
+  "pluginMenuEntries": [],
+  "selectedAppId": "TestApp#Android#MockAndroidDevice#serial",
+  "selectedAppPluginListRevision": 0,
+  "selectedDevice": {
+    "deviceType": "physical",
+    "os": "Android",
+    "serial": "serial",
+    "title": "MockAndroidDevice",
+  },
+  "selectedPlugin": "TestPlugin",
+  "staticView": null,
+  "uninitializedClients": [],
+  "userPreferredApp": "TestApp",
+  "userPreferredDevice": "MockAndroidDevice",
+  "userPreferredPlugin": "TestPlugin",
+}
+`;
+
+exports[`can create a Fake flipper with legacy wrapper 2`] = `
+{
+  "clientPlugins": Map {
+    "TestPlugin" => SandyPluginDefinition {
+      "css": undefined,
+      "details": {
+        "dir": "/Users/mock/.flipper/thirdparty/flipper-plugin-sample1",
+        "entry": "./test/index.js",
+        "id": "TestPlugin",
+        "isActivatable": true,
+        "main": "dist/bundle.js",
+        "name": "flipper-plugin-hello",
+        "pluginType": "client",
+        "source": "src/index.js",
+        "specVersion": 2,
+        "title": "TestPlugin",
+        "version": "0.1.0",
+      },
+      "id": "TestPlugin",
+      "isDevicePlugin": false,
+      "module": {
+        "Component": [Function],
+        "plugin": [Function],
+      },
+    },
+  },
+  "devicePlugins": Map {},
+  "disabledPlugins": [],
+  "failedPlugins": [],
+  "gatekeepedPlugins": [],
+  "initialized": true,
+  "installedPlugins": Map {},
+  "loadedPlugins": Map {},
+  "marketplacePlugins": [],
+  "selectedPlugins": [],
+  "uninstalledPluginNames": Set {},
+}
+`;

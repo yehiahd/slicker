@@ -1,0 +1,45 @@
+{
+  "$schema": "https://fbflipper.com/schemas/plugin-package/v2.json",
+  "name": "flipper-plugin-ui-debugger",
+  "id": "ui-debugger",
+  "pluginType": "client",
+  "version": "0.0.0",
+  "flipperBundlerEntry": "index.tsx",
+  "main": "dist/bundle.js",
+  "license": "MIT",
+  "title": "UI Debugger",
+  "icon": "nav-magnifying-glass",
+  "keywords": [
+    "flipper-plugin"
+  ],
+  "dependencies": {
+    "lodash": "^4.17.21",
+    "react-color": "^2.19.3",
+    "react-hotkeys-hook": "^3.4.7",
+    "react-query": "^3.39.1",
+    "async": "2.3.0",
+    "@tanstack/react-virtual": "3.0.0-beta.54",
+    "ts-retry-promise": "^0.8.1",
+    "memoize-weak": "^1.0.2",
+    "eventemitter3": "^4.0.7"
+  },
+  "devDependencies": {
+    "@types/async": "3.2.20",
+    "typed-emitter": "^2.1.0"
+  },
+  "bugs": {
+    "url": "https://github.com/facebook/flipper/issues"
+  },
+  "peerDependencies": {
+    "@ant-design/icons": "*",
+    "@emotion/styled": "*",
+    "@emotion/css": "*",
+    "@types/node": "*",
+    "@types/react": "*",
+    "@types/react-dom": "*",
+    "antd": "*",
+    "flipper-plugin": "*",
+    "react": "*",
+    "react-dom": "*"
+  }
+}

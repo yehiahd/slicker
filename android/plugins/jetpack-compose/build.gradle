@@ -1,0 +1,41 @@
+/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+android {
+    namespace 'com.facebook.flipper.plugins.jetpackcompose'
+    compileSdkVersion rootProject.compileSdkVersion
+    buildToolsVersion rootProject.buildToolsVersion
+
+    ndkVersion rootProject.ndkVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
+    }
+
+    compileOptions {
+        targetCompatibility rootProject.javaTargetVersion
+        sourceCompatibility rootProject.javaTargetVersion
+    }
+
+    dependencies {
+        implementation project(':android')
+        implementation "androidx.compose.ui:ui:$COMPOSE_VERSION"
+        implementation "androidx.compose.ui:ui-tooling:$COMPOSE_VERSION"
+        implementation "androidx.compose.ui:ui-tooling-data:$COMPOSE_VERSION"
+        implementation "org.jetbrains.kotlin:kotlin-reflect:$KOTLIN_VERSION"
+        implementation "androidx.collection:collection-ktx:1.4.0"
+        implementation project(':inspection-lib')
+        implementation deps.soloader
+    }
+}
+
+
+apply plugin: 'com.vanniktech.maven.publish'

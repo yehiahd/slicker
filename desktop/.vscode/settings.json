@@ -1,0 +1,41 @@
+{
+  "eslint.enable": true,
+  "eslint.format.enable": true,
+  "eslint.lintTask.enable": true,
+  "eslint.packageManager": "yarn",
+  "eslint.codeActionsOnSave.mode": "all",
+  "editor.formatOnSave": true,
+  "prettier.formatAlreadyFormattedFilesOnSave": false,
+  "files.eol": "\n",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "eslint.workingDirectories": [
+    {
+      "mode": "auto"
+    }
+  ],
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "jest.autoEnable": false,
+  "jest.enableInlineErrorMessages": true,
+  "jest.runAllTestsFirst": false,
+  "jest.pathToConfig": "jest.config.js",
+  "jest.pathToJest": "node_modules/.bin/jest",
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "jest.jestCommandLine": "export TZ=Pacific/Pohnpei; node_modules/.bin/jest --config jest.config.js",
+  "jest.autoRun": {
+    "watch": true,
+    "onStartup": ["all-tests"]
+  }
+}

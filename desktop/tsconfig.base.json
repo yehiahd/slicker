@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "lib": ["ES2021"],
+    "esModuleInterop": true,
+    "target": "ES2021",
+    "removeComments": false,
+    "preserveConstEnums": true,
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
+    "jsx": "react",
+    "moduleResolution": "node",
+    "skipLibCheck": true,
+    "strict": true,
+    "useUnknownInCatchVariables": false,
+    "composite": true,
+    "incremental": true,
+    "baseUrl": ".",
+    "allowJs": true,
+    "rootDir": ".",
+    "paths": {
+      "flipper": ["./deprecated-exports/src"],
+      "flipper-plugin": ["./flipper-plugin/src"],
+      "eslint-plugin-flipper": ["./eslint-plugin-flipper/src"],
+      "flipper-server": ["./flipper-server/src"],
+      "flipper-common": ["./flipper-common/src"],
+      "flipper-*": ["./*/src"]
+    },
+    // by default we don't include any @types, as to white list them specifically per project.
+    // this avoids hoised @types packages being shared by all projects implicitly
+    "types": []
+  },
+  "exclude": ["**/lib/", "**/dist/", "**/node_modules/", "**/__tests__/"]
+}

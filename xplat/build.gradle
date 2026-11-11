@@ -1,0 +1,56 @@
+/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+apply plugin: 'com.android.library'
+
+android {
+    namespace 'com.facebook.xplat.sonar'
+    compileSdkVersion rootProject.compileSdkVersion
+    buildToolsVersion rootProject.buildToolsVersion
+    ndkVersion rootProject.ndkVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
+        externalNativeBuild {
+            cmake {
+                arguments '-DANDROID_TOOLCHAIN=clang', '-DANDROID_STL=c++_shared'
+            }
+        }
+    }
+    externalNativeBuild {
+        cmake {
+            path './CMakeLists.txt'
+        }
+    }
+
+    sourceSets {
+        main {
+            manifest.srcFile './AndroidManifest.xml'
+        }
+    }
+
+    buildFeatures {
+        prefab true
+    }
+
+    dependencies {
+        implementation project(':third-party')
+        implementation project(':folly')
+        implementation deps.openssl
+    }
+}
+
+// Patch below is used in case the 'configureCMake' task
+// gets executed in parallel with the 'preBuild' task.
+// Our CMakeFile expects third-party dependencies to be already
+// in-place and patched.
+tasks.matching { it.name.startsWith("configureCMake") }.all {
+    dependsOn(tasks.getByPath(':third-party:prepare'))
+}
+
+preBuild.dependsOn(tasks.getByPath(':third-party:prepare'))

@@ -1,0 +1,13 @@
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "lib",
+    "rootDir": "src",
+    "types": ["../types/npm-api", "../types/decompress-unzip", "../types/decompress-targz"]
+  },
+  "references": [
+    {
+      "path": "../flipper-common"
+    }
+  ]
+}

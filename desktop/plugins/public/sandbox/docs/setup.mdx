@@ -1,0 +1,14 @@
+import useBaseUrl from '@docusaurus/useBaseUrl';
+import Link from '@docusaurus/Link';
+
+To use the <Link to={useBaseUrl("/docs/features/plugins/sandbox")}>Sandbox plugin</Link>, you need to add the plugin to your Flipper client instance.
+
+## Android
+
+```java
+import com.facebook.flipper.plugins.sandbox.SandboxFlipperPlugin;
+import com.facebook.flipper.plugins.sandbox.SandboxFlipperPluginStrategy;
+
+final SandboxFlipperPluginStrategy strategy = getStrategy(); // Your strategy goes here
+client.addPlugin(new SandboxFlipperPlugin(strategy));
+```

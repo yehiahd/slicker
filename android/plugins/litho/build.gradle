@@ -1,0 +1,48 @@
+/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+android {
+    namespace 'com.facebook.flipper.plugins.litho'
+    compileSdkVersion rootProject.compileSdkVersion
+    buildToolsVersion rootProject.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
+    }
+
+    compileOptions {
+        targetCompatibility rootProject.javaTargetVersion
+        sourceCompatibility rootProject.javaTargetVersion
+    }
+
+    dependencies {
+        compileOnly deps.lithoAnnotations
+        implementation project(':android')
+        implementation deps.kotlinCoroutinesAndroid
+        implementation deps.lithoCore
+        api deps.lithoEditorCore
+        api(deps.lithoEditorFlipper) {
+            exclude group:'com.facebook.flipper', module:'flipper'
+        }
+        implementation deps.lithoSectionsDebug
+        implementation deps.lithoSectionsWidget
+        implementation deps.lithoSectionsCore
+        implementation deps.lithoWidget
+        implementation deps.supportAppCompat
+        implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.1"
+        compileOnly deps.jsr305
+
+        testImplementation deps.junit
+        testImplementation deps.robolectric
+    }
+}
+
+apply plugin: 'com.vanniktech.maven.publish'

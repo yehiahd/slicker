@@ -1,0 +1,40 @@
+/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+apply plugin: 'com.android.library'
+
+android {
+    namespace 'com.glog'
+    compileSdkVersion rootProject.compileSdkVersion
+    buildToolsVersion rootProject.buildToolsVersion
+    ndkVersion rootProject.ndkVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
+        buildConfigField "boolean", "IS_INTERNAL_BUILD", 'true'
+        buildConfigField "boolean", "IS_ASAN_BUILD", 'false'
+        externalNativeBuild {
+            cmake {
+                arguments '-DANDROID_TOOLCHAIN=clang'
+            }
+        }
+    }
+    lintOptions {
+        abortOnError false
+    }
+    sourceSets {
+        main {
+            manifest.srcFile './ApplicationManifest.xml'
+        }
+    }
+    externalNativeBuild {
+        cmake {
+            path './CMakeLists.txt'
+        }
+    }
+}
