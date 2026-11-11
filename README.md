@@ -11,8 +11,8 @@
 
 ---
 
-Slicker is a lightweight debugging tool for Android. Your debug build connects to a desktop app
-running in your browser, where you can inspect:
+Slicker is a lightweight debugging tool for Android. Your debug build connects to the Slicker
+desktop app on your Mac, where you can inspect:
 
 | Plugin | What you see |
 |---|---|
@@ -105,14 +105,17 @@ Full setup, configuration and troubleshooting: [slicker-android/README.md](slick
 ./scripts/slicker-dmg.sh
 ```
 
-Produces `dist/Slicker-<version>-arm64.dmg` (about 120 MB, includes its own Node runtime). Upload it to a
+Produces `dist/Slicker-<version>-arm64.dmg` (about 115 MB, includes its own Node runtime). Upload it to a
 GitHub release so users can download it. The app is ad-hoc signed, not notarized.
+
+Needs the Xcode command line tools (`xcode-select --install`): the build compiles the native window app
+from `desktop/static/slicker-mac/main.swift` with `swiftc`.
 
 ## Repository layout
 
 ```
 slicker-android/   Android library (slicker, slicker-noop) and a sample app
-desktop/           Desktop app (server + browser UI)
+desktop/           Desktop app: server, web UI, native Mac app (static/slicker-mac)
 scripts/           slicker-desktop.sh (run from source), slicker-dmg.sh (build the Mac app)
 SLICKER_NOTES.md   Protocol notes
 ```

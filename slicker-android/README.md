@@ -28,7 +28,7 @@ Node or `npx` (the script fetches Node 20 automatically; Flipper's dependencies 
 
 - First run builds the desktop (a few minutes) and installs it to `~/.slicker/server`.
 - Later runs start in a couple of seconds.
-- Opens **http://localhost:52342** in your browser.
+- Opens **http://localhost:52342** in your browser (the source build has no native window; use the DMG app for that).
 - After changing desktop code, rebuild with `./scripts/slicker-desktop.sh --rebuild`.
 
 The desktop detects every adb device/emulator and runs `adb reverse tcp:8333 tcp:8333` on it, so the app
