@@ -37,7 +37,7 @@ can reach it at `localhost:8333`. No manual adb step is needed.
 ### Option A: JitPack (recommended)
 
 Nothing to build. Releases are published from git tags at
-`https://jitpack.io/#<github-user>/slicker`.
+`https://jitpack.io/#yehiahd/slicker`.
 
 `settings.gradle.kts`:
 
@@ -55,13 +55,12 @@ App module `build.gradle.kts`:
 
 ```kotlin
 dependencies {
-    debugImplementation("com.github.<github-user>.slicker:slicker:<tag>")
-    releaseImplementation("com.github.<github-user>.slicker:slicker-noop:<tag>")
+    debugImplementation("com.github.yehiahd.slicker:slicker:v0.1.0")
+    releaseImplementation("com.github.yehiahd.slicker:slicker-noop:v0.1.0")
 }
 ```
 
-Replace `<github-user>` with the GitHub account hosting the repo and `<tag>` with a release tag
-(e.g. `v0.1.0`).
+Use the latest release tag instead of `v0.1.0` when newer ones exist.
 
 ### Option B: local build (mavenLocal)
 
@@ -90,7 +89,7 @@ dependencies {
 ### 3.1 Dependencies
 
 Add the repository and dependencies from step 2 (JitPack or mavenLocal). The examples below use the
-local coordinates; with JitPack use `com.github.<github-user>.slicker:slicker:<tag>` instead.
+local coordinates; with JitPack use `com.github.yehiahd.slicker:slicker:v0.1.0` instead.
 
 Using other build types or flavors (e.g. `staging`)? Every variant needs exactly one of the two:
 
@@ -187,7 +186,7 @@ git tag v0.1.0
 git push origin v0.1.0
 ```
 
-Then open `https://jitpack.io/#<github-user>/slicker`, pick the tag and press **Get it** (the first
+Then open `https://jitpack.io/#yehiahd/slicker`, pick the tag and press **Get it** (the first
 request triggers the build). The repository must be public, or connected to a paid JitPack plan.
 
 ## Project layout
