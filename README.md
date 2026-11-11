@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="desktop/static/slicker-icon.svg" alt="Slicker logo" width="120"/>
+  <img src="assets/slicker-logo.png" alt="Slicker logo" width="120"/>
 </p>
 <h1 align="center">Slicker</h1>
 <p align="center">
@@ -22,6 +22,20 @@ running in your browser, where you can inspect:
 
 The Android library is pure Kotlin (no C++ or NDK) and needs no certificate setup. Release builds use
 a no-op artifact, so nothing ships to users.
+
+## Screenshots
+
+**Network**: every request and response from OkHttp
+
+![Network plugin](assets/screenshots/network.png)
+
+**Databases**: browse tables and run SQL
+
+![Databases plugin](assets/screenshots/databases.png)
+
+**Shared Preferences**: values and a live change log
+
+![Shared Preferences plugin](assets/screenshots/preferences.png)
 
 ## Quick start
 

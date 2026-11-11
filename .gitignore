@@ -67,3 +67,6 @@ website/src/embedded-pages/docs/plugins/
 **/*/flipper-server-log.out
 
 *.salive
+
+# Local brand notes (not published)
+BRAND.md
