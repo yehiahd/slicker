@@ -43,7 +43,8 @@ import plist from 'simple-plist';
 const SUPPORTED_NODE_PLATFORM = 'node16';
 // Node version below is only used for macOS AARCH64 builds as we download
 // the binary directly from Node distribution site instead of relying on pkg-fetch.
-const NODE_VERSION = 'v16.15.0';
+// Slicker: Node 20 (Flipper's dependencies break on Node 22+).
+const NODE_VERSION = 'v20.20.2';
 
 enum BuildPlatform {
   LINUX = 'linux',
@@ -628,7 +629,7 @@ async function installNodeBinary(outputPath: string, platform: BuildPlatform) {
       // - `mkdir bin && cp flipper-runtime bin/node && tar -czvf node-${NODE_VERSION}-darwin-arm64.tar.gz bin`
       // - Upload the resulting tar ball to the Flipper release page as a new tag: https://github.com/facebook/flipper/releases
       await download(
-        `https://github.com/facebook/flipper/releases/download/node-${NODE_VERSION}/${name}.tar.gz`,
+        `https://nodejs.org/dist/${NODE_VERSION}/${name}.tar.gz`,
         downloadOutputPath,
       );
       // Finally, unpack the tarball to a local folder i.e. outputPath.
@@ -677,10 +678,17 @@ async function createMacDMG(
   platform: BuildPlatform,
   outputPath: string,
   destPath: string,
+  versionNumberForDmg: string,
 ) {
+  // Slicker: ad-hoc sign the app (Apple Silicon refuses unsigned code) and add an
+  // Applications shortcut so the DMG supports drag-to-install.
+  const appPath = path.join(outputPath, 'Slicker.app');
+  await execAsync(`codesign --force --deep --sign - "${appPath}"`);
+  await fs.ensureSymlink('/Applications', path.join(outputPath, 'Applications'));
+
   console.log(`⚙️  Create macOS DMG from: ${outputPath}`);
 
-  const name = `Flipper-server-${platform}.dmg`;
+  const name = `Slicker-${versionNumberForDmg}-${platform === BuildPlatform.MAC_AARCH64 ? 'arm64' : 'x64'}.dmg`;
   const temporaryDirectory = os.tmpdir();
 
   const dmgOutputPath = path.resolve(temporaryDirectory, name);
@@ -689,7 +697,7 @@ async function createMacDMG(
 
   const dmgPath = path.resolve(destPath, name);
 
-  const cmd = `hdiutil create -format UDZO -srcfolder "${outputPath}/" -volname "Flipper" ${dmgOutputPath}`;
+  const cmd = `hdiutil create -format UDZO -srcfolder "${outputPath}/" -volname "Slicker" ${dmgOutputPath}`;
 
   return new Promise<void>((resolve, reject) => {
     exec(cmd, async (error, _stdout, stderr) => {
@@ -801,7 +809,7 @@ async function setUpMacBundle(
     console.log(`⚙️  Update plist with build information`);
     const plistPath = path.join(
       outputDir,
-      'Flipper.app',
+      'Slicker.app',
       'Contents',
       'Info.plist',
     );
@@ -818,7 +826,7 @@ async function setUpMacBundle(
 
     serverOutputDir = path.join(
       outputDir,
-      'Flipper.app',
+      'Slicker.app',
       'Contents',
       'Resources',
       'server',
@@ -826,7 +834,7 @@ async function setUpMacBundle(
 
     nodeBinaryFile = path.join(
       outputDir,
-      'Flipper.app',
+      'Slicker.app',
       'Contents',
       'MacOS',
       'flipper-runtime',
@@ -878,11 +886,11 @@ async function setUpMacBundle(
       `⚙️  Successfully built platform: ${platform}, output: ${outputPath}`,
     );
 
-    const appPath = path.join(outputDir, 'Flipper.app');
+    const appPath = path.join(outputDir, 'Slicker.app');
     await fs.emptyDir(appPath);
     await fs.copy(outputPath, appPath);
 
-    // const appPath = path.join(outputDir, 'Flipper.app');
+    // const appPath = path.join(outputDir, 'Slicker.app');
     // if (await fs.exists(appPath)) {
     //   await fs.rm(appPath, {recursive: true, force: true});
     // }
@@ -910,7 +918,7 @@ async function bundleServerReleaseForPlatform(
   ) {
     await setUpMacBundle(outputDir, bundleDir, platform, versionNumber);
     if (argv.dmg) {
-      await createMacDMG(platform, outputDir, distDir);
+      await createMacDMG(platform, outputDir, distDir, versionNumber);
     }
   } else {
     const outputPaths = {

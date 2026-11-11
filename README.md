@@ -39,13 +39,19 @@ a no-op artifact, so nothing ships to users.
 
 ## Quick start
 
-**1. Start the desktop** (needs `adb` and Node or `npx`):
+**1. Install and open the desktop app** (macOS, Apple Silicon):
 
-```bash
-./scripts/slicker-desktop.sh
-```
+1. Download `Slicker-<version>-arm64.dmg` from
+   [Releases](https://github.com/yehiahd/slicker/releases).
+2. Open it and drag **Slicker** into **Applications**.
+3. The first time, right-click **Slicker** in Applications and choose **Open**, then **Open** again.
+   The app is not notarized by Apple, so a plain double-click is blocked once. If macOS still refuses,
+   go to System Settings → Privacy & Security and press **Open Anyway**.
 
-It opens http://localhost:52342. The first run builds the desktop and takes a few minutes.
+Slicker opens in your browser at http://localhost:52342. It needs `adb` (Android SDK
+platform-tools); it finds it in the default Android Studio location.
+
+Building from source instead (needs Node or `npx`): `./scripts/slicker-desktop.sh`.
 
 **2. Add the library** to your app:
 
@@ -86,12 +92,21 @@ plugins.
 
 Full setup, configuration and troubleshooting: [slicker-android/README.md](slicker-android/README.md).
 
+## Building the Mac app
+
+```bash
+./scripts/slicker-dmg.sh
+```
+
+Produces `dist/Slicker-<version>-arm64.dmg` (about 120 MB, includes its own Node runtime). Upload it to a
+GitHub release so users can download it. The app is ad-hoc signed, not notarized.
+
 ## Repository layout
 
 ```
 slicker-android/   Android library (slicker, slicker-noop) and a sample app
 desktop/           Desktop app (server + browser UI)
-scripts/           slicker-desktop.sh: build and start the desktop
+scripts/           slicker-desktop.sh (run from source), slicker-dmg.sh (build the Mac app)
 SLICKER_NOTES.md   Protocol notes
 ```
 

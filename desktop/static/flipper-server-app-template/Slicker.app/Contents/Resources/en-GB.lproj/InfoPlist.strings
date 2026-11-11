@@ -3,8 +3,8 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDisplayName</key>
-	<string>Flipper Server</string>
+	<string>Slicker</string>
 	<key>CFBundleName</key>
-	<string>Flipper Server</string>
+	<string>Slicker</string>
 </dict>
 </plist>

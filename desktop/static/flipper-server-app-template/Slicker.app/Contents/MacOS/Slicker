@@ -5,10 +5,10 @@ NODE_PATH="${SCRIPT_PATH}/flipper-runtime"
 SERVER_RESOURCES="$SCRIPT_PATH/../Resources/server"
 
 cd "$SERVER_RESOURCES" || exit 1
-echo "Starting flipper-server ..."
+echo "Starting Slicker ..."
 "$NODE_PATH" . "$@" &
 
-# Wait for the Flipper HTTP server to start listening
+# Wait for the Slicker HTTP server to start listening
 while ! curl -s http://localhost:52342 >/dev/null; do
     sleep 1
 done
