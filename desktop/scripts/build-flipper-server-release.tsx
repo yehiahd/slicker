@@ -806,6 +806,17 @@ async function setUpMacBundle(
       return obj;
     }
 
+    // Slicker: compile the native window app (Swift + WebKit) as the bundle executable.
+    const nativeSource = path.join(staticDir, 'slicker-mac', 'main.swift');
+    const nativeOut = path.join(outputDir, 'Slicker.app', 'Contents', 'MacOS', 'Slicker');
+    const swiftTarget =
+      platform === BuildPlatform.MAC_AARCH64 ? 'arm64-apple-macos12' : 'x86_64-apple-macos12';
+    console.log(`⚙️  Compiling native Slicker app for ${swiftTarget}`);
+    await execAsync(
+      `swiftc -O -target ${swiftTarget} "${nativeSource}" -o "${nativeOut}" -framework Cocoa -framework WebKit`,
+    );
+    await fs.remove(path.join(outputDir, 'Slicker.app', 'Contents', 'MacOS', '.keep'));
+
     console.log(`⚙️  Update plist with build information`);
     const plistPath = path.join(
       outputDir,

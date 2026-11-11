@@ -307,7 +307,18 @@ async function launch() {
   openUI(UIPreference.PWA, argv.port);
 }
 
+// Slicker: a dropped socket (e.g. the adb server restarting) must not take the whole server down.
+const RECOVERABLE_SOCKET_ERRORS = new Set(['ECONNRESET', 'EPIPE', 'ECONNREFUSED']);
+
 process.on('uncaughtException', (error) => {
+  const code = (error as NodeJS.ErrnoException)?.code;
+  if (code && RECOVERABLE_SOCKET_ERRORS.has(code)) {
+    console.warn(
+      `[flipper-server] ignoring recoverable socket error ${code}:`,
+      error.message,
+    );
+    return;
+  }
   console.error(
     '[flipper-server] uncaught exception, process will exit.',
     error,

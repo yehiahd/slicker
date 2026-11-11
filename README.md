@@ -48,14 +48,14 @@ a no-op artifact, so nothing ships to users.
    The app is not notarized by Apple, so a plain double-click is blocked once. If macOS still refuses,
    go to System Settings → Privacy & Security and press **Open Anyway**.
 
-Slicker opens in your browser at http://localhost:52342. It needs `adb` (Android SDK
+Slicker opens as a normal Mac app with its own window and Dock icon. It needs `adb` (Android SDK
 platform-tools); it finds it in the default Android Studio location.
 
-- Slicker runs in the background, with no Dock icon or window of its own. Opening it again brings
-  the browser tab back.
-- On first launch a short setup wizard runs (platform, health check, optional browser-app install).
-  Press **Done** on the last step to finish.
-- To stop Slicker: `pkill -f flipper-runtime`. Server logs are in `~/Library/Logs/Slicker/server.log`.
+- Quitting Slicker (Cmd+Q, or closing its window) also stops its server.
+- On first launch a short two-step setup wizard runs (platform, then health check).
+  Press **Done** on the health check to finish.
+- The same UI is also served at http://localhost:52342 while Slicker runs (View → Open in Browser).
+- Server logs are in `~/Library/Logs/Slicker/server.log`. If the server stops, Slicker restarts it.
 - Android only: iOS devices and simulators are not supported.
 
 Building from source instead (needs Node or `npx`): `./scripts/slicker-desktop.sh`.

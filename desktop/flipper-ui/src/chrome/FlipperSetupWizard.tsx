@@ -33,7 +33,6 @@ function getNextStep(currentStep: StepName): StepName {
     return (
       {
         platform: 'doctor',
-        doctor: 'pwa',
       } as Record<StepName, StepName>
     )[currentStep];
   }
@@ -51,7 +50,6 @@ function getPrevStep(currentStep: StepName): StepName {
     return (
       {
         doctor: 'platform',
-        pwa: 'doctor',
       } as Record<StepName, StepName>
     )[currentStep];
   }
@@ -71,7 +69,6 @@ function getCurrentStepNumber(step: StepName): number {
       {
         platform: 1,
         doctor: 2,
-        pwa: 3,
       } as Record<StepName, number>
     )[step];
   }
@@ -141,7 +138,9 @@ export function FlipperSetupWizard({
   const user = useStore((store) => store.user);
   const loginState: StepState = user?.id != null ? 'success' : 'init';
   const dispatch = useDispatch();
-  const isLastOptionalStep = currentStep === 'pwa';
+  // Slicker: the native Mac app replaces the browser-app (PWA) install step, so the health check is last.
+  const isLastOptionalStep =
+    currentStep === (constants.IS_PUBLIC_BUILD ? 'doctor' : 'pwa');
   const closable = isLastOptionalStep ? true : closableProp ?? closableState;
   const onClose = () => {
     onHide();
@@ -196,7 +195,7 @@ export function FlipperSetupWizard({
     return (
       <Typography.Title>
         {name} {getCurrentStepNumber(currentStep)} /{' '}
-        {constants.IS_PUBLIC_BUILD ? 3 : 4}
+        {constants.IS_PUBLIC_BUILD ? 2 : 4}
       </Typography.Title>
     );
   }, [currentStep]);

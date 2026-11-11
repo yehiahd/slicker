@@ -40,8 +40,6 @@
 	<true/>
 	<key>LSMinimumSystemVersion</key>
 	<string>11.0</string>
-	<key>LSUIElement</key>
-	<true/>
 	<key>NSAppleScriptEnabled</key>
 	<true/>
 	<key>NSHighResolutionCapable</key>
