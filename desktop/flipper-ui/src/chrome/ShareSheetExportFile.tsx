@@ -132,7 +132,7 @@ export default class ShareSheetExportFile extends Component<Props, State> {
         <FlexColumn>
           <Title bold>Data Exported Successfully</Title>
           <InfoText>
-            When sharing your Flipper data, consider that the captured data
+            When sharing your Slicker data, consider that the captured data
             might contain sensitive information like access tokens used in
             network requests.
           </InfoText>
@@ -174,7 +174,7 @@ export default class ShareSheetExportFile extends Component<Props, State> {
       <ShareSheetPendingDialog
         width={500}
         statusUpdate={statusUpdate}
-        statusMessage="Creating Flipper Export..."
+        statusMessage="Creating Slicker Export..."
         onCancel={() => this.cancelAndHide()}
       />
     );

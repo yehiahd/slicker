@@ -307,7 +307,7 @@ export type DataTableManager<T> = {
 
 const showPowerSearchMigrationWarning = () => {
   console.warn(
-    'Flipper is migrating to the new power search (see https://fburl.com/workplace/eewxik3o). Your plugin uses tableManagerRef which is partially incompatible with the new API. THIS API CALL DOES NOTHING AT THIS POINT! Please, migrate to the new API by explicitly using _MasterDetailWithPowerSearch, _DataTableWithPowerSearch, _DataTableWithPowerSearchManager (see https://fburl.com/code/dpawdt69). As a temporary workaround, feel free to use legacy MasterDetailLegacy, DataTableLegacy, DataTableManagerLegacy components to force the usage of the old search.',
+    'Slicker is migrating to the new power search (see https://fburl.com/workplace/eewxik3o). Your plugin uses tableManagerRef which is partially incompatible with the new API. THIS API CALL DOES NOTHING AT THIS POINT! Please, migrate to the new API by explicitly using _MasterDetailWithPowerSearch, _DataTableWithPowerSearch, _DataTableWithPowerSearchManager (see https://fburl.com/code/dpawdt69). As a temporary workaround, feel free to use legacy MasterDetailLegacy, DataTableLegacy, DataTableManagerLegacy components to force the usage of the old search.',
   );
   getFlipperLib().logger.track(
     'usage',

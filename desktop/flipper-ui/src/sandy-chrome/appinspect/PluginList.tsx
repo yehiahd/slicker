@@ -211,7 +211,7 @@ export const PluginList = memo(function PluginList({
             <PluginGroup
               key="disabled"
               title="Disabled"
-              hint="This section shows the plugins that are currently disabled. If a plugin is enabled, you will be able to interact with it. If a plugin is disabled it won't consume resources in Flipper or in the connected application.">
+              hint="This section shows the plugins that are currently disabled. If a plugin is enabled, you will be able to interact with it. If a plugin is disabled it won't consume resources in Slicker or in the connected application.">
               {disabledPlugins.map((plugin) => (
                 <PluginEntry
                   key={plugin.id}
@@ -247,7 +247,7 @@ export const PluginList = memo(function PluginList({
           <PluginGroup
             key="uninstalled"
             title="Detected in App"
-            hint="The plugins below are supported by the selected device / application, but not installed in Flipper.
+            hint="The plugins below are supported by the selected device / application, but not installed in Slicker.
             To install plugin, hover it and click to the 'Download' icon.">
             {annotatedDownloadablePlugins.map(([plugin, downloadStatus]) => (
               <PluginEntry
@@ -278,7 +278,7 @@ export const PluginList = memo(function PluginList({
             <PluginGroup
               key="unavailable"
               title="Unavailable plugins"
-              hint="The plugins below are installed in Flipper, but not available for the selected device / application. Hover the plugin info box to find out why.">
+              hint="The plugins below are installed in Slicker, but not available for the selected device / application. Hover the plugin info box to find out why.">
               {unavailablePlugins.map(([plugin, reason]) => (
                 <PluginEntry
                   key={plugin.id}

@@ -91,7 +91,7 @@ async function handlePluginDownload(
     if (startedByUser) {
       showErrorNotification(
         `Failed to download plugin "${title}" v${version}.`,
-        'Please check that you are on VPN/Lighthouse and that you are logged into Flipper.',
+        'Please check that you are on VPN/Lighthouse and that you are logged into Slicker.',
       );
     }
     throw error;

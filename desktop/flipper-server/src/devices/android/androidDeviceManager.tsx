@@ -68,6 +68,8 @@ export class AndroidDeviceManager {
                 ports.serverPorts.insecure,
                 ports.altServerPorts.secure,
                 ports.altServerPorts.insecure,
+                // slicker: plain-ws clients connect to the browser port
+                ports.browserPort,
               ])
               // We may not be able to establish a reverse connection, e.g. for old Android SDKs.
               // This is *generally* fine, because we hard-code the ports on the SDK side.

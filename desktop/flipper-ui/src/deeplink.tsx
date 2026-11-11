@@ -54,16 +54,16 @@ export async function handleDeeplink(
     const url = uri.searchParams.get('url');
     if (url) {
       const handle = Dialog.loading({
-        message: 'Importing Flipper trace...',
+        message: 'Importing Slicker trace...',
       });
       return fetch(url)
         .then((res) => res.text())
         .then((data) => importDataToStore(url, data, store))
         .catch((e: Error) => {
-          console.warn('Failed to download Flipper trace', e);
+          console.warn('Failed to download Slicker trace', e);
           message.error({
             duration: 0,
-            content: `Failed to download Flipper trace: ${e}`,
+            content: `Failed to download Slicker trace: ${e}`,
           });
         })
         .finally(() => {

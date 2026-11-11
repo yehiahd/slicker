@@ -35,11 +35,11 @@ const IosXcodeNodeInstalled = (
 
 const IosIdbNotInstalled = (props: PropsFor<'ios.idb--not_installed'>) => (
   <Typography.Paragraph>
-    IDB is required to use Flipper with iOS devices. It can be installed from
+    IDB is required to use Slicker with iOS devices. It can be installed from
     <a href="https://github.com/facebook/idb" target="_blank">
       github.com/facebook/idb
     </a>{' '}
-    and configured in Flipper settings. Current setting: "${props.idbPath}"
+    and configured in Slicker settings. Current setting: "${props.idbPath}"
     isn't a valid IDB installation.
   </Typography.Paragraph>
 );

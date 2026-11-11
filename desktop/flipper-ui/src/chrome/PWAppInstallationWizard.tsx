@@ -98,7 +98,7 @@ export default function PWAInstallationWizard({
       <Layout.Container gap>
         <Layout.Container style={{width: '100%', paddingBottom: 15}}>
           <p>
-            Please install Flipper as a PWA. Installed Progressive Web Apps run
+            Please install Slicker as a PWA. Installed Progressive Web Apps run
             in a standalone window instead of a browser tab. They're launchable
             from your home screen, dock, taskbar, or shelf. It's possible to
             search for and jump between them with the app switcher, making them

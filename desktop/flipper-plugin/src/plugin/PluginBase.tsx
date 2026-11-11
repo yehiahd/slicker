@@ -307,7 +307,7 @@ export abstract class BasePluginInstance {
                 this.rootStates[key].deserialize(this.initialStates[key]);
               } else {
                 console.warn(
-                  `Tried to initialize plugin with existing data, however data for "${key}" is missing. Was the export created with a different Flipper version?`,
+                  `Tried to initialize plugin with existing data, however data for "${key}" is missing. Was the export created with a different Slicker version?`,
                 );
               }
             }

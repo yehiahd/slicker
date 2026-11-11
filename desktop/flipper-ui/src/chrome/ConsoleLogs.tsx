@@ -45,7 +45,7 @@ export function enableConsoleHook() {
     exportLogs.push(logMessage);
 
     if (level === 'debug') {
-      return; // See below, skip debug messages which are generated very aggressively by Flipper
+      return; // See below, skip debug messages which are generated very aggressively by Slicker
     }
     const newLogs = displayLogsAtom.get().slice(-MAX_DISPLAY_LOG_ITEMS);
     newLogs.push(logMessage);

@@ -44,7 +44,7 @@ export default function UpdateIndicator() {
         break;
       case 'update-available':
         console.log(
-          `Flipper update available: ${versionCheckResult.version} at ${versionCheckResult.url}`,
+          `Slicker update available: ${versionCheckResult.version} at ${versionCheckResult.url}`,
         );
         notification.info({
           placement: 'bottomLeft',
@@ -56,7 +56,7 @@ export default function UpdateIndicator() {
         break;
       case 'error':
         console.warn(
-          `Failed to check for Flipper update: ${versionCheckResult.msg}`,
+          `Failed to check for Slicker update: ${versionCheckResult.msg}`,
         );
         break;
     }
@@ -79,7 +79,7 @@ export default function UpdateIndicator() {
         notification.warning({
           placement: 'bottomLeft',
           key: 'launchermsg',
-          message: 'Flipper version warning',
+          message: 'Slicker version warning',
           description: <NotificationBody text={launcherMsg.message} />,
           duration: null,
         });
@@ -135,12 +135,12 @@ export function getUpdateAvailableMessage(versionCheckResult: {
 
   return (
     <>
-      Flipper version {versionCheckResult.version} is now available.
+      Slicker version {versionCheckResult.version} is now available.
       {fbConfig.isFBBuild ? (
         fbConfig.getReleaseChannel() === ReleaseChannel.INSIDERS ||
         launcherSettings.ignoreLocalPin ? (
           <Button block type="primary" onClick={shutdownFlipper}>
-            Quit Flipper to upgrade
+            Quit Slicker to upgrade
           </Button>
         ) : (
           <>
@@ -148,7 +148,7 @@ export function getUpdateAvailableMessage(versionCheckResult: {
             Run <code>arc pull</code> (optionally with <code>--latest</code>) in{' '}
             <code>~/fbsource</code>, then{' '}
             <Button block type="primary" onClick={shutdownFlipper}>
-              Quit Flipper to upgrade
+              Quit Slicker to upgrade
             </Button>
           </>
         )

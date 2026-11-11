@@ -365,7 +365,7 @@ class SettingsSheet extends Component<Props, State> {
           type="primary"
           onClick={this.applyChanges}>
           Apply and{' '}
-          {this.props.platform === 'darwin' ? 'Restart' : 'Quit Flipper'}
+          {this.props.platform === 'darwin' ? 'Restart' : 'Quit Slicker'}
         </Button>
       </>
     );

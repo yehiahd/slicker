@@ -108,7 +108,7 @@ export function DIYConnectivityFix({
                     logTroubleshootGuideStep('delete-certs');
                     notification.info({
                       message: `Certificates deleted`,
-                      description: 'Please restart Flipper',
+                      description: 'Please restart Slicker',
                       duration: 10000,
                     });
                   })
@@ -118,7 +118,7 @@ export function DIYConnectivityFix({
                     });
                   });
               }}>
-              Click to clear Flipper certificates
+              Click to clear Slicker certificates
             </Button>
           </li>
         )}
@@ -133,17 +133,17 @@ export function DIYConnectivityFix({
                 .exec('restart')
                 .then(() => {
                   notification.info({
-                    message: `Restarting Flipper server`,
+                    message: `Restarting Slicker server`,
                   });
                 })
                 .catch((e) => {
                   notification.error({
-                    message: `Failed to restart Flipper`,
+                    message: `Failed to restart Slicker`,
                     description: e.message,
                   });
                 });
             }}>
-            Click to restart Flipper
+            Click to restart Slicker
           </Button>
         </li>
       </ol>

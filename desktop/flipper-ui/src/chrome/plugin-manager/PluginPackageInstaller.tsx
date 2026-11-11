@@ -82,7 +82,7 @@ export default function PluginPackageInstaller({
   return (
     <Toolbar>
       <FileSelector
-        label="Select a Flipper package or just drag and drop it here..."
+        label="Select a Slicker package or just drag and drop it here..."
         encoding="base64"
         onChange={async (newFile) => {
           if (newFile) {

@@ -213,7 +213,7 @@ class PluginDebugger extends Component<Props> {
   render() {
     return (
       <Layout.Container pad>
-        <InfoText>The table lists all plugins known to Flipper.</InfoText>
+        <InfoText>The table lists all plugins known to Slicker.</InfoText>
         <TableContainer>
           <ManagedTable
             columns={COLUMNS}

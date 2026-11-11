@@ -149,7 +149,7 @@ function ExportEverythingEverywhereAllAtOnceStatusModal({
   useEffect(() => {
     switch (status?.[0]) {
       case 'logs': {
-        setStatusMessage(<p>Exporting Flipper logs...</p>);
+        setStatusMessage(<p>Exporting Slicker logs...</p>);
         return;
       }
       case 'files': {
@@ -157,7 +157,7 @@ function ExportEverythingEverywhereAllAtOnceStatusModal({
         const setFileExportMessage = () => {
           setStatusMessage(
             <>
-              <p>Exporting Flipper debug files from all devices...</p>
+              <p>Exporting Slicker debug files from all devices...</p>
               <p>It could take a long time!</p>
               <p>Let's count sheep while we wait: {sheepCount++}.</p>
               <p>We'll skip it automatically if it exceeds 3 minutes.</p>
@@ -175,7 +175,7 @@ function ExportEverythingEverywhereAllAtOnceStatusModal({
         const setStateExportMessage = () => {
           setStatusMessage(
             <>
-              <p>Exporting Flipper state...</p>
+              <p>Exporting Slicker state...</p>
               <p>It also could take a long time!</p>
               <p>This time we could count dinosaurs: {dinosaursCount++}.</p>
               <p>We'll skip it automatically if it exceeds 2 minutes.</p>
@@ -563,7 +563,7 @@ function TroubleshootMenu({
                 setFlipperDevToolsModalOpen(true);
               }}>
               <Layout.Horizontal center gap="small">
-                Flipper Logs <Badge count={flipperErrorLogCount} />
+                Slicker Logs <Badge count={flipperErrorLogCount} />
               </Layout.Horizontal>
             </Menu.Item>
             <Menu.Item
@@ -592,7 +592,7 @@ function TroubleshootMenu({
               onClick={() => {
                 getFlipperServer().exec('restart');
               }}>
-              Restart Flipper Server
+              Restart Slicker Server
             </Menu.Item>
           </Menu.SubMenu>
         </Menu>
@@ -697,12 +697,12 @@ function ExtrasMenu() {
         },
         {
           key: 'importFlipperFile',
-          label: 'Import Flipper file',
+          label: 'Import Slicker file',
           onClick: startFileImportTracked,
         },
         {
           key: 'exportFlipperFile',
-          label: 'Export Flipper file',
+          label: 'Export Slicker file',
           onClick: startFileExportTracked,
         },
         {
@@ -714,7 +714,7 @@ function ExtrasMenu() {
           children: [
             {
               key: 'styleguide',
-              label: 'Flipper Style Guide',
+              label: 'Slicker Style Guide',
               onClick: () => {
                 store.dispatch(setStaticView(StyleGuide));
               },

@@ -53,7 +53,7 @@ export function SandyApp() {
   });
 
   useEffect(() => {
-    const title = `Flipper (${getVersionString()}${
+    const title = `Slicker (${getVersionString()}${
       config.isFBBuild ? '@FB' : ''
     })`;
 
@@ -87,7 +87,7 @@ export function SandyApp() {
                 width={570}
                 title={
                   <>
-                    <WarningOutlined /> This Version of Flipper is Unsupported
+                    <WarningOutlined /> This Version of Slicker is Unsupported
                   </>
                 }
                 footer={
@@ -98,7 +98,7 @@ export function SandyApp() {
                         getFlipperLib().openLink('munki://detail-Flipper');
                         onHide();
                       }}>
-                      Open Flipper Stable instead
+                      Open Slicker Stable instead
                     </Button>
                     <Button type="ghost" onClick={() => onHide()}>
                       I understand
@@ -107,17 +107,17 @@ export function SandyApp() {
                 }>
                 This version is only meant to be used for React Native
                 debugging. It is not maintained and it doesn't receive updates.
-                Instead, you should be using the main Flipper version from
+                Instead, you should be using the main Slicker version from
                 Managed Software Center for all other purposes.
               </Modal>
             ));
           } else if (fbConfig.warnFBEmployees && isProduction()) {
             notification.warning({
               placement: 'bottomLeft',
-              message: 'Please use Flipper@FB',
+              message: 'Please use Slicker@FB',
               description: (
                 <>
-                  You are using the open-source version of Flipper. Install the
+                  You are using the open-source version of Slicker. Install the
                   internal build from{' '}
                   <Link href="munki://detail-Flipper">
                     Managed Software Center

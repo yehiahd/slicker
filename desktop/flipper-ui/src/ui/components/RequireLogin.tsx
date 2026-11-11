@@ -21,7 +21,7 @@ export const RequireLogin: React.FC<{}> = ({children}) => {
       <Layout.Container pad>
         <Alert
           type="error"
-          message="This feature is only available in the Facebook version of Flipper"
+          message="This feature is only available in the Facebook version of Slicker"
         />
       </Layout.Container>
     );

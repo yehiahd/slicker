@@ -112,7 +112,7 @@ export const PlatformSelectWizard = withTrackingScope(
           onClick={() => applyChanges(settingsPristine)}
           disabled={settingsPristine}
           title={settingsPristine ? 'No changes made' : ''}>
-          Save changes and {platform === 'darwin' ? 'restart' : 'kill'} Flipper
+          Save changes and {platform === 'darwin' ? 'restart' : 'kill'} Slicker
         </Button>
       </Layout.Container>
     );

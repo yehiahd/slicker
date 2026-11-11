@@ -20,9 +20,9 @@ export default function SandyDesignSystem() {
   return (
     <Layout.ScrollContainer className={reset}>
       <Layout.Container gap="large">
-        <Card title="Flipper Design System" bordered={false}>
+        <Card title="Slicker Design System" bordered={false}>
           <p>
-            Welcome to the Flipper Design System. The Flipper design system is
+            Welcome to the Slicker Design System. The Slicker design system is
             based on{' '}
             <Link href="https://ant.design/components/overview/">
               Ant Design
@@ -41,7 +41,7 @@ export default function SandyDesignSystem() {
           </p>
           <ul>
             <li>
-              <code>Layout</code>: use Flipper's <code>Layout.*</code> instead.
+              <code>Layout</code>: use Slicker's <code>Layout.*</code> instead.
             </li>
           </ul>
           <p>Sandy guidelines</p>
@@ -127,7 +127,7 @@ export default function SandyDesignSystem() {
           <Alert
             message={
               <>
-                The following theme veriables are exposed from the Flipper{' '}
+                The following theme veriables are exposed from the Slicker{' '}
                 <code>theme</code> object. See the colors section above for a
                 preview of the colors.
               </>

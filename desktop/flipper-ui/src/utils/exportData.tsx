@@ -467,7 +467,7 @@ export async function exportStore(
 }> {
   getLogger().track('usage', EXPORT_FLIPPER_TRACE_EVENT);
   performance.mark(EXPORT_FLIPPER_TRACE_TIME_SERIALIZATION_EVENT);
-  statusUpdate && statusUpdate('Preparing to export Flipper data...');
+  statusUpdate && statusUpdate('Preparing to export Slicker data...');
   const state = store.getState();
   const {exportData, fetchMetaDataErrors} = await getStoreExport(
     store,
@@ -475,7 +475,7 @@ export async function exportStore(
     idler,
   );
 
-  statusUpdate && statusUpdate('Serializing Flipper data...');
+  statusUpdate && statusUpdate('Serializing Slicker data...');
   const serializedString = JSON.stringify(exportData);
   if (serializedString.length <= 0) {
     throw new Error('Serialize function returned empty string');
@@ -659,7 +659,7 @@ export async function exportEverythingEverywhereAllAtOnce(
     });
   } catch (e) {
     console.error(
-      'exportEverythingEverywhereAllAtOnce -> failed to export Flipper device debug data',
+      'exportEverythingEverywhereAllAtOnce -> failed to export Slicker device debug data',
       e,
     );
   }
@@ -676,7 +676,7 @@ export async function exportEverythingEverywhereAllAtOnce(
     zip.file('flipper_export', serializedString);
   } catch (e) {
     console.error(
-      'exportEverythingEverywhereAllAtOnce -> failed to export Flipper state',
+      'exportEverythingEverywhereAllAtOnce -> failed to export Slicker state',
       e,
     );
   }
@@ -706,7 +706,7 @@ export async function exportEverythingEverywhereAllAtOnce(
         );
         notification.warn({
           message: 'Failed to upload debug data',
-          description: `Flipper failed to upload debug export (${exportedFilePath}) automatically. Please, attach it to the support request manually in the comments after it is created.`,
+          description: `Slicker failed to upload debug export (${exportedFilePath}) automatically. Please, attach it to the support request manually in the comments after it is created.`,
           duration: null,
         });
       }
@@ -727,7 +727,7 @@ export async function exportEverythingEverywhereAllAtOnce(
     } else {
       notification.warn({
         message: 'Export cancelled',
-        description: `Exporting Flipper debug data was cancelled. Flipper team will not be able to help you without this data. Please, restart the export.`,
+        description: `Exporting Slicker debug data was cancelled. Slicker team will not be able to help you without this data. Please, restart the export.`,
         duration: null,
       });
       onStatusUpdate?.('cancelled');

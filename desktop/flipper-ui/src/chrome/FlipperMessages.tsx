@@ -73,7 +73,7 @@ const COLUMN_CONFIG: DataTableColumn<MessageRow>[] = [
   },
   {
     key: 'flipperInternalMethod',
-    title: 'Flipper Internal Method',
+    title: 'Slicker Internal Method',
   },
   {
     key: 'plugin',
@@ -173,7 +173,7 @@ export function FlipperMessages() {
       <Layout.Container center pad gap style={{width: '100%', marginTop: 200}}>
         {paused ? (
           <>
-            Click to enable debugging Flipper messages between the Flipper
+            Click to enable debugging Slicker messages between the Slicker
             application and connected clients: <PauseResumeButton />
           </>
         ) : (

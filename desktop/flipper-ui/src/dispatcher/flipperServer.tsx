@@ -233,7 +233,7 @@ export function connectFlipperServerToStore(
     sideEffectDisposer = startSideEffects(store, server);
   }
   console.log(
-    'Flipper server started and accepting device / client connections',
+    'Slicker server started and accepting device / client connections',
   );
 
   server
@@ -278,7 +278,7 @@ function startSideEffects(store: Store, server: FlipperServer) {
     (state) => state.settingsState,
     (settings) => {
       server.exec('persist-settings', settings).catch((e) => {
-        console.error('Failed to persist Flipper settings', e);
+        console.error('Failed to persist Slicker settings', e);
       });
     },
   );
@@ -311,7 +311,7 @@ function handleServerStateChange({
   error?: string;
 }) {
   if (state === 'error') {
-    console.warn(`Flipper server state -> ${state}`, error);
+    console.warn(`Slicker server state -> ${state}`, error);
     if (error?.includes('EADDRINUSE')) {
       handeEADDRINUSE(error);
     } else {
@@ -323,7 +323,7 @@ function handleServerStateChange({
       });
     }
   } else {
-    console.info(`Flipper server state -> ${state}`);
+    console.info(`Slicker server state -> ${state}`);
   }
 }
 
@@ -334,8 +334,8 @@ function handeEADDRINUSE(errorMessage: string) {
     description: (
       <>
         Couldn't start connection server. Looks like you have multiple copies of
-        Flipper running or another process is using the same port(s). As a
-        result devices will not be able to connect to Flipper.
+        Slicker running or another process is using the same port(s). As a
+        result devices will not be able to connect to Slicker.
         <br />
         <br />
         Please try to kill the offending process by running{' '}

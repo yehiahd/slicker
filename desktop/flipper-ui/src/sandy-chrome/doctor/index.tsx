@@ -66,7 +66,7 @@ const CommonWatchmanInstalled = (
       Watchman
     </a>{' '}
     file watching service is installed and added to PATH. Live reloading after
-    changes during Flipper plugin development is enabled.
+    changes during Slicker plugin development is enabled.
   </Typography.Paragraph>
 );
 
@@ -78,7 +78,7 @@ const CommonWatchmanNotInstalled = (
       Watchman
     </a>{' '}
     file watching service is not installed or not added to PATH. Live reloading
-    after changes during Flipper plugin development is disabled.
+    after changes during Slicker plugin development is disabled.
   </Typography.Paragraph>
 );
 
@@ -278,7 +278,7 @@ const IosXctraceNotInstalled = (
 const IdbNoContext = (_props: PropsFor<'ios.idb--no_context'>) => (
   <Typography.Paragraph>
     Not enough context to check IDB installation. Needs to be run through
-    Flipper UI.
+    Slicker UI.
   </Typography.Paragraph>
 );
 
@@ -292,7 +292,7 @@ const IdbPhysicalDeviceDisabled = (
 
 const IosIdbInstalled = (_props: PropsFor<'ios.idb--installed'>) => (
   <Typography.Paragraph>
-    Flipper is configured to use your IDB installation.
+    Slicker is configured to use your IDB installation.
   </Typography.Paragraph>
 );
 

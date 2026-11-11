@@ -85,7 +85,7 @@ export function OpenFlippeSettingBtn() {
       type="link"
       style={{padding: 0, display: 'inline'}}
       onClick={() => store.dispatch(toggleSettingsModal(true))}>
-      Flipper Settings
+      Slicker Settings
     </Button>
   );
 }

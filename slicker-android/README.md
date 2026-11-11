@@ -1,0 +1,177 @@
+# slicker — Android setup
+
+A lightweight replacement for the retired Flipper Android SDK. One desktop window shows:
+
+| Desktop plugin | What you see |
+|---|---|
+| **Network** | Every OkHttp request/response: URL, method, status, headers, bodies, timing |
+| **Databases** | All SQLite/Room databases: browse tables, structure, run SQL |
+| **Shared Preferences Viewer** | All SharedPreferences files: view, edit, delete, live change log |
+
+It is pure Kotlin (no C++/Folly/NDK) and talks to the Slicker desktop (a rebranded fork of the Flipper desktop) over a plain local WebSocket, so
+there is no certificate setup.
+
+---
+
+## 1. Start the desktop
+
+Requirements: macOS/Linux, `adb` on your PATH (Android SDK platform-tools), and Node or `npx`
+(the script fetches Node 20 automatically; Flipper's dependencies do not run on Node 22+).
+
+```bash
+./scripts/slicker-desktop.sh
+```
+
+- First run builds the desktop (a few minutes) and installs it to `~/.slicker/server`.
+- Later runs start in a couple of seconds.
+- Opens **http://localhost:52342** in your browser.
+- After changing desktop code, rebuild with `./scripts/slicker-desktop.sh --rebuild`.
+
+The desktop detects every adb device/emulator and runs `adb reverse tcp:8333 tcp:8333` on it, so the app
+can reach it at `localhost:8333`. No manual adb step is needed.
+
+---
+
+## 2. Publish the Android library (once per version)
+
+From `slicker-android/`:
+
+```bash
+./gradlew publishToMavenLocal
+```
+
+This installs to `~/.m2/repository/dev/slicker/`:
+
+| Artifact | Use for |
+|---|---|
+| `dev.slicker:slicker:0.1.0` | debug builds |
+| `dev.slicker:slicker-noop:0.1.0` | release builds (same API, does nothing, no extra code) |
+
+> Gradle needs JDK 17+. If `java -version` is older, point `JAVA_HOME` at Android Studio's JDK:
+> `export JAVA_HOME="/Applications/Android Studio.app/Contents/jbr/Contents/Home"`
+
+---
+
+## 3. Add it to any Android project
+
+### 3.1 Repository
+
+`settings.gradle.kts`:
+
+```kotlin
+dependencyResolutionManagement {
+    repositories {
+        google()
+        mavenCentral()
+        mavenLocal() // slicker
+    }
+}
+```
+
+### 3.2 Dependencies
+
+App module `build.gradle.kts`:
+
+```kotlin
+dependencies {
+    debugImplementation("dev.slicker:slicker:0.1.0")
+    releaseImplementation("dev.slicker:slicker-noop:0.1.0")
+}
+```
+
+Using other build types or flavors (e.g. `staging`)? Every variant needs exactly one of the two:
+
+```kotlin
+"stagingImplementation"("dev.slicker:slicker:0.1.0")
+```
+
+The real artifact also does nothing on its own when the app is not debuggable, so using it in a
+debuggable `staging` build is safe.
+
+### 3.3 Start it
+
+In your `Application`:
+
+```kotlin
+import dev.slicker.Slicker
+
+class MyApp : Application() {
+    override fun onCreate() {
+        super.onCreate()
+        Slicker.start(this)
+    }
+}
+```
+
+### 3.4 Hook up Network
+
+Add the interceptor to every `OkHttpClient` you want to see (Retrofit uses OkHttp underneath):
+
+```kotlin
+val client = OkHttpClient.Builder()
+    .addInterceptor(Slicker.networkInterceptor())
+    .build()
+```
+
+With Hilt/Dagger, add it where you build the client in your network module.
+
+Order matters: add it **last** (after auth/header interceptors) to see the final request as sent,
+or use `addNetworkInterceptor(...)` to see what goes over the wire after redirects and compression.
+
+Databases and Preferences need no code: every database in `databases/` and every file in
+`shared_prefs/` is picked up automatically.
+
+### 3.5 Run
+
+1. Start the desktop (step 1).
+2. Run the debug app on an emulator or USB device.
+3. In the desktop, pick your app at the top left, then click each plugin under **Disabled** and press
+   **Enable Plugin** (first time only, it is remembered).
+
+---
+
+## Configuration (optional)
+
+```kotlin
+Slicker.start(
+    this,
+    SlickerConfig(
+        host = "localhost",          // desktop host as seen from the device
+        port = 8333,                 // flipper-server browser port
+        deviceId = null,             // name in the desktop device list; default ANDROID_ID
+        reconnectDelayMs = 3_000,
+        preferenceFiles = null,      // e.g. listOf("settings", "session"); null = all files
+    ),
+)
+```
+
+---
+
+## Troubleshooting
+
+| Symptom | Fix |
+|---|---|
+| App not shown in the desktop | Check `adb reverse --list` shows `tcp:8333`. If not, re-plug the device or run `adb reverse tcp:8333 tcp:8333`. Check logcat tag `Slicker` for `Connected to flipper-server`. |
+| `CLEARTEXT communication ... not permitted` in logcat | Your app's network security config blocks plain HTTP. Allow `localhost` in a **debug-only** config (`src/debug/res/xml/network_security_config.xml`) with `<domain includeSubdomains="false">localhost</domain>` and `cleartextTrafficPermitted="true"`. |
+| Two entries for the same phone in the desktop | Expected: one is the adb device, the other is the app connection (named by `deviceId`). Select the one that lists your app. |
+| Nothing happens in a release build | By design: the no-op artifact (or a non-debuggable app) disables everything. |
+| Desktop fails with `SlowBuffer` errors | You are on Node 22+. Use the script, which uses Node 20. |
+| Network body missing | Bodies are captured up to 1 MB. One-shot/duplex request bodies (e.g. streaming uploads) are not read. |
+
+## Limitations
+
+- Network mocking (Flipper's "Mock" tab) is not supported.
+- Network bodies are capped at 1 MB.
+- Desktop and device must be connected over adb (USB or emulator). Wi-Fi-only devices need
+  `adb connect` first.
+
+## Project layout
+
+```
+slicker-android/
+  slicker/        library: client + Network/Databases/Preferences plugins
+  slicker-noop/   release no-op with the same API
+  sample/              demo app (seeded DB + prefs, GET/POST buttons)
+scripts/slicker-desktop.sh   build + start the desktop
+SLICKER_NOTES.md                     protocol notes
+```

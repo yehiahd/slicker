@@ -128,11 +128,11 @@ function WelcomeScreenContent() {
           src={
             process.env.FLIPPER_REACT_NATIVE_ONLY
               ? './icon-rn-only.png'
-              : './icon.png'
+              : './slicker-icon.svg'
           }
           preview={false}
         />
-        <Title level={1}>Welcome to Flipper</Title>
+        <Title level={1}>Welcome to Slicker</Title>
         <Text>
           Using release channel{' '}
           <code
@@ -156,7 +156,7 @@ function WelcomeScreenContent() {
             {isProduction() ? `Version ${getAppVersion()}` : 'Development Mode'}
           </Text>
           <Tooltip title="Changelog" placement="bottom">
-            <NUX title="See Flipper changelog" placement="top">
+            <NUX title="See Slicker changelog" placement="top">
               <Button
                 size="small"
                 icon={<HistoryOutlined />}
@@ -170,8 +170,8 @@ function WelcomeScreenContent() {
       <Space direction="vertical" size="large" style={{width: '100%'}}>
         <Row
           icon={<RocketOutlined />}
-          title="Using Flipper"
-          subtitle="Learn how Flipper can help you debug your App"
+          title="Using Slicker"
+          subtitle="Inspect network, databases and preferences of your app"
           onClick={openExternal('https://fbflipper.com/docs/features')}
         />
         <Row
@@ -182,14 +182,14 @@ function WelcomeScreenContent() {
         />
         <Row
           icon={<CodeOutlined />}
-          title="Add Flipper Support to Your App"
+          title="Add Slicker to Your App"
           subtitle="Get started with these pointers"
           onClick={openExternal('https://fbflipper.com/docs/getting-started')}
         />
         <Row
           icon={<BugOutlined />}
           title="Contributing and Feedback"
-          subtitle="Report issues and help us improve Flipper"
+          subtitle="Report issues and help us improve Slicker"
           onClick={openExternal(constants.FEEDBACK_GROUP_LINK)}
         />
       </Space>

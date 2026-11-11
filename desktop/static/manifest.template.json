@@ -1,12 +1,12 @@
 {
     "$schema": "https://json.schemastore.org/web-manifest-combined.json",
-    "name": "Flipper",
-    "description": "Flipper is a platform for debugging iOS, Android and React Native apps",
-    "short_name": "Flipper",
+    "name": "Slicker",
+    "description": "Slicker: network, database and preferences inspector for Android apps",
+    "short_name": "Slicker",
     "start_url": "index.web.html",
     "display": "standalone",
     "background_color": "#fff",
-    "theme_color": "#722ed1",
+    "theme_color": "#0e7490",
     "orientation": "portrait-primary",
     "icons": [
       {

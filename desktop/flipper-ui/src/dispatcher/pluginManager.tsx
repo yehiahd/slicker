@@ -48,7 +48,7 @@ import {getFlipperServer} from '../flipperServer';
 async function refreshInstalledPlugins(store: Store) {
   const flipperServer = getFlipperServer();
   if (!flipperServer) {
-    throw new Error('Flipper Server not ready');
+    throw new Error('Slicker Server not ready');
   }
   await flipperServer.exec(
     'plugins-remove-plugins',

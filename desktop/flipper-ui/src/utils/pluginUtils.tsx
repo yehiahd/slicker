@@ -305,7 +305,7 @@ export function computePluginLists(
             : client?.query.app) ?? 'unknown'
         }' (${
           plugin.pluginType === 'device' ? device?.os : client?.query.os
-        }) and not installed in Flipper`,
+        }) and not installed in Slicker`,
       ]);
     });
 

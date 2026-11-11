@@ -244,7 +244,7 @@ export function tryGetFlipperLibImplementation(): FlipperLib | undefined {
 
 export function getFlipperLib(): FlipperLib {
   if (!flipperLibInstance) {
-    throw new Error('Flipper lib not instantiated');
+    throw new Error('Slicker lib not instantiated');
   }
   return flipperLibInstance;
 }

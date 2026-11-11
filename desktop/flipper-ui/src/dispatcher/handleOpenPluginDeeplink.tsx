@@ -323,7 +323,7 @@ async function verifyFlipperIsUpToDate(title: string) {
   const currentVersion = getAppVersion();
   const handle = Dialog.loading({
     title,
-    message: 'Checking if Flipper is up-to-date',
+    message: 'Checking if Slicker is up-to-date',
   });
   try {
     const result = await checkForUpdate(currentVersion);
@@ -331,7 +331,7 @@ async function verifyFlipperIsUpToDate(title: string) {
     switch (result.kind) {
       case 'error':
         // if we can't tell if we're up to date, we don't want to halt the process on that.
-        console.warn('Failed to verify Flipper version', result);
+        console.warn('Failed to verify Slicker version', result);
         return;
       case 'up-to-date':
         return;
@@ -349,7 +349,7 @@ async function verifyFlipperIsUpToDate(title: string) {
     }
   } catch (e) {
     // if we can't tell if we're up to date, we don't want to halt the process on that.
-    console.warn('Failed to verify Flipper version', e);
+    console.warn('Failed to verify Slicker version', e);
     handle.close();
   }
 }
@@ -376,7 +376,7 @@ async function verifyPluginStatus(
         await Dialog.alert({
           type: 'warning',
           title,
-          message: `No plugin with id '${pluginId}' is known to Flipper. Please correct the deeplink, or install the plugin from NPM using the plugin manager.`,
+          message: `No plugin with id '${pluginId}' is known to Slicker. Please correct the deeplink, or install the plugin from NPM using the plugin manager.`,
         });
         return [false, status];
       case 'failed':
@@ -397,7 +397,7 @@ async function verifyPluginStatus(
                   href={`https://www.internalfb.com/intern/gatekeeper/projects/${reason}`}>
                   here
                 </Typography.Link>{' '}
-                to enroll, restart Flipper, and click the link again.
+                to enroll, restart Slicker, and click the link again.
               </p>
             ),
             okText: 'Restart',
@@ -431,7 +431,7 @@ async function installMarketPlacePlugin(
   if (
     !(await Dialog.confirm({
       title,
-      message: `The requested plugin '${pluginId}' is currently not installed, but can be downloaded from the Flipper plugin Marketplace. If you trust the source of the current link, press 'Install' to continue`,
+      message: `The requested plugin '${pluginId}' is currently not installed, but can be downloaded from the Slicker plugin Marketplace. If you trust the source of the current link, press 'Install' to continue`,
       okText: 'Install',
     }))
   ) {

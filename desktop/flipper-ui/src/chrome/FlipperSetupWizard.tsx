@@ -223,7 +223,7 @@ export function FlipperSetupWizard({
                     message: 'Setup Wizard is skipped',
                     description: (
                       <>
-                        Flipper may not be configured fully or function
+                        Slicker may not be configured fully or function
                         properly. You can reopen and finish setup from the menu{' '}
                         {'More\u00A0⚙︎\u00A0>\u00A0Setup\u00A0wizard'}
                       </>

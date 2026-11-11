@@ -69,10 +69,10 @@ class AppFrame extends React.Component<
         <Layout.Top style={{maxWidth: 800, height: '100%'}}>
           <Result
             status="error"
-            title="Detected a Flipper crash"
+            title="Detected a Slicker crash"
             subTitle={
               <p>
-                A crash was detected in the Flipper chrome. Filing a{' '}
+                A crash was detected in the Slicker chrome. Filing a{' '}
                 <Typography.Link
                   href={
                     constants.IS_PUBLIC_BUILD
@@ -129,7 +129,7 @@ class AppFrame extends React.Component<
 
   componentDidCatch(error: any, errorInfo: any) {
     console.error(
-      `Flipper chrome crash: ${error}`,
+      `Slicker chrome crash: ${error}`,
       error,
       `\nComponents: ${errorInfo?.componentStack}`,
     );

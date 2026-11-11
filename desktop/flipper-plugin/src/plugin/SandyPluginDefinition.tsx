@@ -73,20 +73,20 @@ export class SandyPluginDefinition {
       this.isDevicePlugin = true;
       if (!module.devicePlugin || typeof module.devicePlugin !== 'function') {
         throw new Error(
-          `Flipper device plugin '${this.id}' should export named function called 'devicePlugin'`,
+          `Slicker device plugin '${this.id}' should export named function called 'devicePlugin'`,
         );
       }
     } else {
       this.isDevicePlugin = false;
       if (!module.plugin || typeof module.plugin !== 'function') {
         throw new Error(
-          `Flipper plugin '${this.id}' should export named function called 'plugin'`,
+          `Slicker plugin '${this.id}' should export named function called 'plugin'`,
         );
       }
     }
     if (!module.Component || typeof module.Component !== 'function') {
       throw new Error(
-        `Flipper plugin '${this.id}' should export named function called 'Component'`,
+        `Slicker plugin '${this.id}' should export named function called 'Component'`,
       );
     }
     this.module = module;

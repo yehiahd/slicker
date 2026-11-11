@@ -226,7 +226,7 @@ class FeedbackComponent extends Component<
           <Row key="thanks">
             Thanks for the feedback! You can now help
             <Link href="https://www.internalfb.com/intern/papercuts/?application=flipper">
-              prioritize bugs and features for Flipper in Papercuts
+              prioritize bugs and features for Slicker in Papercuts
             </Link>
           </Row>,
           dismissRow(this.props.dismiss),
@@ -338,7 +338,7 @@ export function SandyRatingButton() {
       trigger="click">
       <NavbarButton
         icon={StarOutlined}
-        label="Rate Flipper"
+        label="Rate Slicker"
         onClick={onClick}
       />
     </Popover>

@@ -109,7 +109,7 @@ const PluginInstaller = function ({
         <Alert
           onClick={restartApp}
           type="error"
-          message="To apply the changes, Flipper needs to reload. Click here to reload!"
+          message="To apply the changes, Slicker needs to reload. Click here to reload!"
           style={{cursor: 'pointer'}}
         />
       )}
@@ -117,7 +117,7 @@ const PluginInstaller = function ({
         <Input.Search
           onChange={(e) => setQuery(e.target.value)}
           value={query}
-          placeholder="Search Flipper plugins..."
+          placeholder="Search Slicker plugins..."
         />
       </Toolbar>
       <ManagedTable

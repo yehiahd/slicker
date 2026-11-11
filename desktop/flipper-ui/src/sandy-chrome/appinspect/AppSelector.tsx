@@ -181,7 +181,7 @@ function AppIcon({
 
 function DeprecationIcon() {
   return (
-    <Tooltip title="RSockets are being deprecated at Flipper. Please, use the latest Flipper client in your app to migrate to WebSockets.">
+    <Tooltip title="RSockets are being deprecated at Slicker. Please, use the latest Slicker client in your app to migrate to WebSockets.">
       <AppIconContainer style={{background: theme.warningColor}}>
         <Glyph
           name="caution-triangle"
