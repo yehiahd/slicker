@@ -31,7 +31,7 @@
     "adbkit": "^2.11.1",
     "adbkit-logcat": "^2.0.1",
     "archiver": "^5.3.1",
-    "async-mutex": "^0.3.2",
+    "async-mutex": "^0.5.0",
     "axios": "^0.26.0",
     "flipper-plugin-lib": "0.0.0",
     "form-data": "^4.0.0",
