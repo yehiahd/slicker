@@ -204,7 +204,9 @@ export class ServerController
         rsocket,
         csr,
         csr_path,
-      },
+        // Slicker: keep the device-matching token.
+        slicker_token: (clientQuery as any).slicker_token,
+      } as SecureClientQuery,
       downgrade,
     );
   }
@@ -527,6 +529,35 @@ export class ServerController
         clientQuery,
         `Detected ${bundleId} on ${clientQuery.device_id} in certificate`,
       );
+    }
+
+    // Slicker: match the app to its real adb device, so device plugins (Crash Reporter, Logs) work.
+    const slickerToken = (clientQuery as any).slicker_token;
+    if (
+      !csr &&
+      slickerToken &&
+      clientQuery.os === 'Android' &&
+      clientQuery.app_id &&
+      this.flipperServer.android
+    ) {
+      try {
+        (clientQuery as any).device_id =
+          await this.flipperServer.android.certificateProvider.getTargetDeviceId(
+            clientQuery,
+            clientQuery.app_id,
+            `/data/data/${clientQuery.app_id}/files/slicker/`,
+            slickerToken,
+          );
+        recorder.log(
+          clientQuery,
+          `Matched ${clientQuery.app_id} to adb device ${clientQuery.device_id}`,
+        );
+      } catch (e) {
+        console.warn(
+          `[conn] Slicker: no adb device found for ${clientQuery.app_id}, keeping ${clientQuery.device_id}`,
+          e,
+        );
+      }
     }
 
     (clientQuery as any).app = appNameWithUpdateHint(clientQuery);

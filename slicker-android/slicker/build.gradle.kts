@@ -22,6 +22,8 @@ android {
 
 dependencies {
     api("com.squareup.okhttp3:okhttp:4.12.0")
+    // Debug-only leak detection, reported to the desktop LeakCanary plugin. Exclude it to opt out.
+    implementation("com.squareup.leakcanary:leakcanary-android:2.14")
 }
 
 publishing {

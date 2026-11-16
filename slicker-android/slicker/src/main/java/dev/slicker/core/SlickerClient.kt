@@ -119,8 +119,21 @@ class SlickerClient(
             .addQueryParameter("app_id", appContext.packageName)
             .addQueryParameter("sdk_version", "4")
             .addQueryParameter("medium", "1")
+            .apply { deviceToken()?.let { addQueryParameter("slicker_token", it) } }
             .build()
     }
+
+    /**
+     * Writes a random token to files/slicker/app.csr. The desktop reads it back with `adb run-as`
+     * to find which adb device this app runs on, so device plugins (Crash Reporter, Logs) apply.
+     */
+    private fun deviceToken(): String? = runCatching {
+        val dir = java.io.File(appContext.filesDir, "slicker").apply { mkdirs() }
+        val file = java.io.File(dir, "app.csr")
+        val token = java.util.UUID.randomUUID().toString()
+        file.writeText(token)
+        token
+    }.getOrNull()
 
     @Suppress("HardwareIds")
     private fun defaultDeviceId(): String =

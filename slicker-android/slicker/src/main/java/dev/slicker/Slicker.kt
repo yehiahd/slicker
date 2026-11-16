@@ -26,6 +26,7 @@ object Slicker {
             addPlugin(networkPlugin)
             addPlugin(DatabasesPlugin(context))
             addPlugin(PreferencesPlugin(context, config.preferenceFiles))
+            leaksPlugin()?.let(::addPlugin)
             start()
         }
     }
@@ -37,4 +38,10 @@ object Slicker {
     }
 
     fun networkInterceptor(): Interceptor = interceptor
+
+    /** LeakCanary is optional: apps can exclude it, so only touch it when it's on the classpath. */
+    private fun leaksPlugin(): dev.slicker.plugins.leaks.LeaksPlugin? = runCatching {
+        Class.forName("leakcanary.LeakCanary")
+        dev.slicker.plugins.leaks.LeaksPlugin().apply { install() }
+    }.getOrNull()
 }

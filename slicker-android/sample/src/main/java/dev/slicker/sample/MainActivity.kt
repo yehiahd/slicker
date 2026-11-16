@@ -30,6 +30,11 @@ class MainActivity : Activity() {
             val body = """{"hello":"slicker"}""".toRequestBody("application/json".toMediaType())
             call(Request.Builder().url("https://httpbin.org/post").post(body).build())
         })
+        layout.addView(button("Leak this screen") {
+            // Deliberate leak for the LeakCanary plugin: keeps this activity alive after it closes.
+            leaked += this
+            recreate()
+        })
         layout.addView(button("Change a preference") {
             getSharedPreferences("settings", Context.MODE_PRIVATE).edit().putInt("counter", ++counter).apply()
         })
@@ -54,5 +59,9 @@ class MainActivity : Activity() {
             }
             override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) = Unit
         }.writableDatabase.close()
+    }
+
+    companion object {
+        private val leaked = mutableListOf<Any>()
     }
 }

@@ -7,6 +7,8 @@ A lightweight replacement for the retired Flipper Android SDK. One desktop windo
 | **Network** | Every OkHttp request/response: URL, method, status, headers, bodies, timing |
 | **Databases** | All SQLite/Room databases: browse tables, structure, run SQL |
 | **Shared Preferences Viewer** | All SharedPreferences files: view, edit, delete, live change log |
+| **LeakCanary** | Memory leaks from the bundled LeakCanary |
+| **Crash Reporter**, **Logs** | Device crashes and logcat, read over adb |
 
 It is pure Kotlin (no C++/Folly/NDK) and talks to the Slicker desktop (a rebranded fork of the Flipper desktop) over a plain local WebSocket, so
 there is no certificate setup.
@@ -59,12 +61,12 @@ App module `build.gradle.kts`:
 
 ```kotlin
 dependencies {
-    debugImplementation("com.github.yehiahd.slicker:slicker:v0.1.1")
-    releaseImplementation("com.github.yehiahd.slicker:slicker-noop:v0.1.1")
+    debugImplementation("com.github.yehiahd.slicker:slicker:v0.1.2")
+    releaseImplementation("com.github.yehiahd.slicker:slicker-noop:v0.1.2")
 }
 ```
 
-Use the latest release tag instead of `v0.1.1` when newer ones exist.
+Use the latest release tag instead of `v0.1.2` when newer ones exist.
 
 ### Option B: local build (mavenLocal)
 
@@ -93,7 +95,7 @@ dependencies {
 ### 3.1 Dependencies
 
 Add the repository and dependencies from step 2 (JitPack or mavenLocal). The examples below use the
-local coordinates; with JitPack use `com.github.yehiahd.slicker:slicker:v0.1.1` instead.
+local coordinates; with JitPack use `com.github.yehiahd.slicker:slicker:v0.1.2` instead.
 
 Using other build types or flavors (e.g. `staging`)? Every variant needs exactly one of the two:
 

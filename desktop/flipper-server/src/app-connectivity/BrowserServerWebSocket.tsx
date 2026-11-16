@@ -143,7 +143,10 @@ class BrowserServerWebSocket extends SecureServerWebSocket {
     if (!parsedBaseQuery) {
       return;
     }
-    return {...parsedBaseQuery, medium: 'NONE'};
+    // Slicker: token the Android app wrote to files/slicker/app.csr, used to find its adb device.
+    const slicker_token =
+      typeof query.slicker_token === 'string' ? query.slicker_token : undefined;
+    return {...parsedBaseQuery, medium: 'NONE', slicker_token} as SecureClientQuery;
   }
 
   protected verifyClient(): ws.VerifyClientCallbackSync {

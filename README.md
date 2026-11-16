@@ -20,6 +20,9 @@ desktop app on your Mac, where you can inspect:
 | **Network** | Every OkHttp request and response: URL, method, status, headers, bodies, timing |
 | **Databases** | All SQLite/Room databases: browse tables, structure, run SQL |
 | **Shared Preferences** | All SharedPreferences files: view, edit, delete, live change log |
+| **LeakCanary** | Memory leaks found by [LeakCanary](https://square.github.io/leakcanary/), with the reference chain. Bundled, no setup |
+| **Crash Reporter** | Every crash on the device, with the stack trace (read from logcat over adb) |
+| **Logs** | The device's logcat, searchable and filterable |
 
 The Android library is pure Kotlin (no C++ or NDK) and needs no certificate setup. Release builds use
 a no-op artifact, so nothing ships to users.
@@ -88,14 +91,14 @@ In your app module's `build.gradle.kts`:
 
 ```kotlin
 dependencies {
-    debugImplementation("com.github.yehiahd.slicker:slicker:v0.1.1")
-    releaseImplementation("com.github.yehiahd.slicker:slicker-noop:v0.1.1")
+    debugImplementation("com.github.yehiahd.slicker:slicker:v0.1.2")
+    releaseImplementation("com.github.yehiahd.slicker:slicker-noop:v0.1.2")
 }
 ```
 
 `slicker` is the real library, and `slicker-noop` has the same API but does nothing, so release builds
 contain no inspector. If you have other build types (for example `staging`), give each one of the two,
-such as `"stagingImplementation"("com.github.yehiahd.slicker:slicker:v0.1.1")`.
+such as `"stagingImplementation"("com.github.yehiahd.slicker:slicker:v0.1.2")`.
 
 Check the [releases](https://github.com/yehiahd/slicker/releases) for a newer version tag.
 
@@ -115,8 +118,19 @@ class MyApp : Application() {
 }
 ```
 
-This turns on all three plugins. Databases and Shared Preferences need nothing else: every database
+This turns on the plugins. Databases and Shared Preferences need nothing else: every database
 in the app's `databases/` folder and every file in `shared_prefs/` is found automatically.
+
+Leak detection also needs nothing else: the debug artifact includes
+[LeakCanary](https://square.github.io/leakcanary/), and Slicker sends its results to the desktop.
+LeakCanary adds its own "Leaks" launcher icon and notifications on the device. If your app already
+uses LeakCanary, keep it; Slicker picks it up. To turn leak detection off, exclude it:
+
+```kotlin
+debugImplementation("com.github.yehiahd.slicker:slicker:v0.1.2") {
+    exclude(group = "com.squareup.leakcanary")
+}
+```
 
 ### Step 5: Hook up Network
 
@@ -179,8 +193,8 @@ already has a `networkSecurityConfig`, add the `localhost` domain to a debug cop
 3. In logcat, filter by the tag `Slicker`. You should see `Connected to flipper-server at localhost:8333`.
 4. In Slicker, click the device and app picker at the top left and choose your app **under your
    device's name**.
-5. In the left sidebar, open **Disabled**, click **Network**, and press **Enable Plugin**. Do the
-   same for **Databases** and **Shared Preferences Viewer**.
+5. **Crash Reporter** and **Logs** are on by default. In the left sidebar, open **Disabled**, click **Network**, and press **Enable Plugin**. Do the
+   same for **Databases**, **Shared Preferences Viewer** and **LeakCanary**.
 
 Plugins are enabled per app and per device, and Slicker remembers your choice. A new app, or the
 same app on another device, starts with everything disabled.
@@ -192,6 +206,10 @@ same app on another device, starts with everything disabled.
   then do the thing you want to inspect.
 - **Databases:** pick a database and a table to browse rows, see the structure, or run SQL in the
   query tab.
+- **LeakCanary:** leaks appear after LeakCanary analyses the heap, which it does when it sees retained
+  objects (sooner when the app goes to the background). Each leak shows the chain of references that
+  keeps the object alive.
+- **Crash Reporter:** every crash on the device with its stack trace.
 - **Shared Preferences Viewer:** pick a file to see its values. Click a value to edit it; changes the
   app makes appear in the change log below.
 
