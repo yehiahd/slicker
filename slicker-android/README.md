@@ -61,12 +61,12 @@ App module `build.gradle.kts`:
 
 ```kotlin
 dependencies {
-    debugImplementation("com.github.yehiahd.slicker:slicker:v0.1.2")
-    releaseImplementation("com.github.yehiahd.slicker:slicker-noop:v0.1.2")
+    debugImplementation("com.github.yehiahd.slicker:slicker:v0.1.3")
+    releaseImplementation("com.github.yehiahd.slicker:slicker-noop:v0.1.3")
 }
 ```
 
-Use the latest release tag instead of `v0.1.2` when newer ones exist.
+Use the latest release tag instead of `v0.1.3` when newer ones exist.
 
 ### Option B: local build (mavenLocal)
 
@@ -95,7 +95,7 @@ dependencies {
 ### 3.1 Dependencies
 
 Add the repository and dependencies from step 2 (JitPack or mavenLocal). The examples below use the
-local coordinates; with JitPack use `com.github.yehiahd.slicker:slicker:v0.1.2` instead.
+local coordinates; with JitPack use `com.github.yehiahd.slicker:slicker:v0.1.3` instead.
 
 Using other build types or flavors (e.g. `staging`)? Every variant needs exactly one of the two:
 
@@ -190,8 +190,8 @@ Slicker.start(
 JitPack builds the library from `jitpack.yml` at the repo root (JDK 17, `slicker-android` only).
 
 ```bash
-git tag v0.1.2
-git push origin v0.1.2
+git tag v0.1.3
+git push origin v0.1.3
 ```
 
 Then open `https://jitpack.io/#yehiahd/slicker`, pick the tag and press **Get it** (the first

@@ -28,6 +28,18 @@ import {
 // eslint-disable-next-line rulesdir/no-restricted-imports-clone
 import {Element} from 'flipper';
 import {processLeaks} from './processLeakString';
+import {Select} from 'antd';
+
+// LeakCanary's own default: while the app is visible, wait for this many retained objects
+// before dumping the heap. In the background it always analyses after 1.
+const DEFAULT_THRESHOLD = 5;
+const THRESHOLD_KEY = 'slicker.leakcanary.threshold';
+const THRESHOLD_OPTIONS = [1, 2, 3, 5, 10];
+
+function storedThreshold(): number {
+  const value = Number(localStorage.getItem(THRESHOLD_KEY));
+  return THRESHOLD_OPTIONS.includes(value) ? value : DEFAULT_THRESHOLD;
+}
 
 type State = {
   leaks: Leak[];
@@ -88,7 +100,11 @@ export default class LeakCanary<PersistedState> extends FlipperPlugin<
     leaksCount: 0,
   };
 
+  threshold = storedThreshold();
+
   init() {
+    this._sendThreshold(this.threshold);
+
     this.client.subscribe('reportLeak', (results: LeakReport) => {
       this._addNewLeaks(processLeaks(results.leaks));
     });
@@ -125,6 +141,19 @@ export default class LeakCanary<PersistedState> extends FlipperPlugin<
       retainedSize: leak.retainedSize,
       details: leak.details,
     };
+  };
+
+  _sendThreshold = (threshold: number) => {
+    this.client.call('setThreshold', {threshold}).catch((e) => {
+      console.warn('[LeakCanary] setThreshold failed with error', e);
+    });
+  };
+
+  _changeThreshold = (threshold: number) => {
+    this.threshold = threshold;
+    localStorage.setItem(THRESHOLD_KEY, String(threshold));
+    this._sendThreshold(threshold);
+    this.forceUpdate();
   };
 
   _clearLeaks = () => {
@@ -273,6 +302,27 @@ export default class LeakCanary<PersistedState> extends FlipperPlugin<
                 }}
               />
               Show full class path
+            </ToolbarItem>
+            <ToolbarItem
+              title={
+                'While the app is on screen, LeakCanary waits for this many retained objects ' +
+                'before analysing (the analysis freezes the app for a few seconds). ' +
+                'In the background it analyses after 1. LeakCanary default: 5.'
+              }>
+              Analyse after
+              <Select
+                size="small"
+                style={{width: 120, marginLeft: 6}}
+                value={this.threshold}
+                onChange={this._changeThreshold}
+                options={THRESHOLD_OPTIONS.map((n) => ({
+                  value: n,
+                  label:
+                    n === DEFAULT_THRESHOLD
+                      ? `${n} (default)`
+                      : `${n} retained`,
+                }))}
+              />
             </ToolbarItem>
           </Toolbar>
         </FlexColumn>

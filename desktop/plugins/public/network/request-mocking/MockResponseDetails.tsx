@@ -172,7 +172,7 @@ export function MockResponseDetails({id, route, isDuplicated}: Props) {
       )}
       <Layout.Container height={500}>
         <Tabs grow>
-          <Tab tab={'Data'}>
+          <Tab tab={'Response'}>
             <Input.TextArea
               wrap="soft"
               autoComplete="off"
@@ -186,7 +186,7 @@ export function MockResponseDetails({id, route, isDuplicated}: Props) {
               style={{flex: 1}}
             />
           </Tab>
-          <Tab tab={'Headers'}>
+          <Tab tab={'Response Headers'}>
             <Layout.Top gap>
               <Layout.Horizontal>
                 <Button

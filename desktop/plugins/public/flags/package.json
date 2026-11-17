@@ -1,0 +1,25 @@
+{
+  "$schema": "https://fbflipper.com/schemas/plugin-package/v2.json",
+  "name": "flipper-plugin-slicker-flags",
+  "id": "Flags",
+  "pluginType": "client",
+  "version": "0.0.0",
+  "flipperBundlerEntry": "index.tsx",
+  "main": "dist/bundle.js",
+  "license": "MIT",
+  "title": "Feature Flags",
+  "icon": "apps",
+  "keywords": ["flipper-plugin", "flags"],
+  "description": "View and override feature flags the app reads with Slicker.flag",
+  "peerDependencies": {
+    "flipper-plugin": "*",
+    "antd": "*",
+    "react": "*",
+    "react-dom": "*",
+    "@emotion/styled": "*",
+    "@ant-design/icons": "*",
+    "@types/react": "*",
+    "@types/react-dom": "*",
+    "@types/node": "*"
+  }
+}

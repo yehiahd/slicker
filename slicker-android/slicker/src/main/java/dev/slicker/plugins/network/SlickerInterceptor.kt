@@ -3,8 +3,11 @@ package dev.slicker.plugins.network
 import android.util.Base64
 import okhttp3.Headers
 import okhttp3.Interceptor
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.Protocol
 import okhttp3.Request
 import okhttp3.Response
+import okhttp3.ResponseBody.Companion.toResponseBody
 import okio.Buffer
 import org.json.JSONArray
 import org.json.JSONObject
@@ -20,6 +23,12 @@ class SlickerInterceptor(
         val request = chain.request()
         val id = UUID.randomUUID().toString()
         plugin.send("newRequest", requestJson(id, request))
+
+        plugin.mocks.firstOrNull { it.matches(request) }?.let { mock ->
+            val response = mockResponse(request, mock)
+            plugin.send("newResponse", responseJson(id, response, isMock = true))
+            return response
+        }
 
         val response = try {
             chain.proceed(request)
@@ -51,7 +60,22 @@ class SlickerInterceptor(
             .put("data", data ?: JSONObject.NULL)
     }
 
-    private fun responseJson(id: String, response: Response): JSONObject {
+    private fun mockResponse(request: Request, mock: MockRoute): Response {
+        val headers = Headers.Builder().apply { mock.headers.forEach { (k, v) -> add(k, v) } }.build()
+        val contentType = headers["Content-Type"]?.toMediaTypeOrNull()
+        return Response.Builder()
+            .request(request)
+            .protocol(Protocol.HTTP_1_1)
+            .code(mock.status)
+            .message("Mocked by Slicker")
+            .headers(headers)
+            .body(mock.body.toResponseBody(contentType))
+            .sentRequestAtMillis(System.currentTimeMillis())
+            .receivedResponseAtMillis(System.currentTimeMillis())
+            .build()
+    }
+
+    private fun responseJson(id: String, response: Response, isMock: Boolean = false): JSONObject {
         val data = runCatching { encode(response.peekBody(maxBodyBytes).bytes()) }.getOrNull()
         return JSONObject()
             .put("id", id)
@@ -59,7 +83,7 @@ class SlickerInterceptor(
             .put("status", response.code)
             .put("reason", response.message)
             .put("headers", headersJson(response.headers, null))
-            .put("isMock", false)
+            .put("isMock", isMock)
             .put("data", data ?: JSONObject.NULL)
             .put("totalChunks", 1)
             .put("index", 0)

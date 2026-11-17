@@ -6,7 +6,7 @@ import WebKit
 
 let serverURL = URL(string: "http://localhost:52342/")!
 
-final class AppDelegate: NSObject, NSApplicationDelegate, WKUIDelegate, WKNavigationDelegate {
+final class AppDelegate: NSObject, NSApplicationDelegate, WKUIDelegate, WKNavigationDelegate, WKDownloadDelegate {
     private var window: NSWindow!
     private var webView: WKWebView!
     private var loadingLabel: NSTextField!
@@ -122,6 +122,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKUIDelegate, WKNaviga
 
     private func buildWindow() {
         let config = WKWebViewConfiguration()
+        // "Safari" in the user agent makes the UI's file saver use a normal <a download>, which
+        // WKDownload handles. Without it, it opens a blank popup that macOS can't open (error -50).
+        config.applicationNameForUserAgent = "Version/17.0 Safari/605.1.15"
         config.websiteDataStore = .default() // keeps plugin settings between launches
         webView = WKWebView(frame: .zero, configuration: config)
         webView.uiDelegate = self
@@ -165,18 +168,50 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKUIDelegate, WKNaviga
     // Links that open a new window (docs, GitHub) go to the default browser.
     func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration,
                  for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
-        if let url = navigationAction.request.url { NSWorkspace.shared.open(url) }
+        if let url = navigationAction.request.url, url.scheme?.hasPrefix("http") == true {
+            NSWorkspace.shared.open(url)
+        }
         return nil
     }
 
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction,
                  decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        if let url = navigationAction.request.url, url.host != "localhost", url.scheme?.hasPrefix("http") == true {
+        if navigationAction.shouldPerformDownload {
+            decisionHandler(.download)
+        } else if let url = navigationAction.request.url, url.host != "localhost", url.scheme?.hasPrefix("http") == true {
             NSWorkspace.shared.open(url)
             decisionHandler(.cancel)
         } else {
             decisionHandler(.allow)
         }
+    }
+
+    // File downloads from the UI (e.g. Export in the Network mock dialog): ask where to save.
+    func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse,
+                 decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
+        decisionHandler(navigationResponse.canShowMIMEType ? .allow : .download)
+    }
+
+    func webView(_ webView: WKWebView, navigationAction: WKNavigationAction, didBecome download: WKDownload) {
+        download.delegate = self
+    }
+
+    func webView(_ webView: WKWebView, navigationResponse: WKNavigationResponse, didBecome download: WKDownload) {
+        download.delegate = self
+    }
+
+    func download(_ download: WKDownload, decideDestinationUsing response: URLResponse,
+                  suggestedFilename: String, completionHandler: @escaping (URL?) -> Void) {
+        let panel = NSSavePanel()
+        panel.nameFieldStringValue = suggestedFilename
+        panel.canCreateDirectories = true
+        guard panel.runModal() == .OK, let url = panel.url else {
+            completionHandler(nil)
+            return
+        }
+        // WKDownload fails if the file exists; the save panel already confirmed overwriting.
+        try? FileManager.default.removeItem(at: url)
+        completionHandler(url)
     }
 
     func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String,

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://fbflipper.com/schemas/plugin-package/v2.json",
+  "name": "flipper-plugin-slicker-actions",
+  "id": "Actions",
+  "pluginType": "client",
+  "version": "0.0.0",
+  "flipperBundlerEntry": "index.tsx",
+  "main": "dist/bundle.js",
+  "license": "MIT",
+  "title": "Actions",
+  "icon": "apps",
+  "keywords": ["flipper-plugin", "actions"],
+  "description": "Buttons the app registers with Slicker.addAction",
+  "peerDependencies": {
+    "flipper-plugin": "*",
+    "antd": "*",
+    "react": "*",
+    "react-dom": "*",
+    "@emotion/styled": "*",
+    "@ant-design/icons": "*",
+    "@types/react": "*",
+    "@types/react-dom": "*",
+    "@types/node": "*"
+  }
+}

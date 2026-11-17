@@ -15,5 +15,8 @@
   "title": "LeakCanary",
   "bugs": {
     "url": "https://github.com/facebook/flipper/issues"
+  },
+  "peerDependencies": {
+    "antd": "*"
   }
 }
