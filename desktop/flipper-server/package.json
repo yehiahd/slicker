@@ -13,7 +13,7 @@
     "envinfo": "^7.8.1",
     "exit-hook": "^2.1.1",
     "express": "^4.17.3",
-    "fb-watchman": "^2.0.2",
+    "fb-watchman": "^2.0.4",
     "file-stream-rotator": "^0.6.1",
     "flipper-common": "0.0.0",
     "flipper-pkg-lib": "0.0.0",
@@ -57,7 +57,7 @@
   },
   "devDependencies": {
     "@types/express": "^4.17.13",
-    "@types/fb-watchman": "^2.0.1",
+    "@types/fb-watchman": "^2.0.6",
     "@types/http-proxy": "^1.17.8",
     "@types/node": "^17.0.31",
     "@types/archiver": "^5.3.1",
